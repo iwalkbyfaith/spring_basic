@@ -1,0 +1,8 @@
+package com.ict.controller.di.classfile;
+
+@Component
+public class PopSinger extends Singer {
+	
+	
+
+}

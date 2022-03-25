@@ -1,0 +1,17 @@
+package com.ict.controller.di;
+
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class DiMainSpringVer {
+
+	public static void main(String[] args) {
+		
+		// root-context라는 공장에 저장된 객체를 뽑아서 써야합니다.
+		// 가져오기 위한 호출 코드를 작성해보겠습니다.
+		
+		GenericXmlApplicationContext context = 
+				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml");
+
+	}
+
+}

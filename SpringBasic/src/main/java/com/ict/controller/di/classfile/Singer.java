@@ -8,6 +8,10 @@
 
 package com.ict.controller.di.classfile;
 
+import org.springframework.stereotype.Component;
+
+//@Component (주석처리함. 단순 상속용으로 하기 위해)
+// Singer를 상속한 발라드가수와 팝 가수를 생성해서 빈 컨테이너에 등록해보겠습니다
 public class Singer {
 	
 	public void sing() {

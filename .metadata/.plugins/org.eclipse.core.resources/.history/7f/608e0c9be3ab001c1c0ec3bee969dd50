@@ -1,0 +1,17 @@
+package com.ict.controller.di.classfile;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Broadcast {
+	
+	
+	@Autowired
+	private Stage stage;
+	
+	
+	public Broadcast(Stage stage) {
+		this.stage = stage;
+	}
+	
+
+}

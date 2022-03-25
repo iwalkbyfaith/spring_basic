@@ -1,0 +1,10 @@
+package com.ict.controller.di;
+
+public class DiMainSpringVer {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

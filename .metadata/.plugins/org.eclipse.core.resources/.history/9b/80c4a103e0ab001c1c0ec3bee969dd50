@@ -1,0 +1,38 @@
+package com.ict.controller.di;
+
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import com.ict.controller.di.classfile.Singer;
+import com.ict.controller.di.classfile.Stage;
+
+public class DiMainSpringVer {
+
+	public static void main(String[] args) {
+		
+		// root-context라는 공장에 저장된 객체를 뽑아서 써야합니다.
+		// 1. 가져오기 위한 호출 코드를 작성해보겠습니다.
+		
+		// 호출코드
+		GenericXmlApplicationContext context = 
+				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml");
+		
+		
+		// 2. 공장 내부 객체 가져오기
+		// 문법 : context.getBean("공장 내부 명칭", 클래스파일명.class);
+		Singer singer = context.getBean("singer", Singer.class);
+		
+		// 3. 가져온 객체 사용하기 ( => new 키워드로 만드는 것과 차이가 없음을 볼 수 있다)
+		singer.sing();
+		
+		// 4. 여러분들이 직접 Stage를 가져다가 실행시키는 코드를 작성해주세요
+		Stage stage = context.getBean("stage", Stage.class);
+		stage.perform();
+		
+		// 해당 코드를 pom.xml에서 3.1.1 버전으로 다운 그레이드하면 바로 에러가 난다.
+		// No default constructor found
+		// 스테이지에는 싱어가 필요한데 싱어를 넣어주지 않아서 그런 것.
+		
+		
+	}
+
+}
