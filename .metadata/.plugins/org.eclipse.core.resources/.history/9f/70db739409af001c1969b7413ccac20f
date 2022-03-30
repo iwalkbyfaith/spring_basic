@@ -1,0 +1,10 @@
+package com.ict.controller;
+
+import org.springframework.stereotype.Controller;
+
+// 어노테이션에 네 종류가 있었는데 @Component, @Repository, @Controller, @
+
+@Controller
+public class BasicController {
+
+}

@@ -1,0 +1,16 @@
+package com.ict.controller.di.classfile;
+
+import org.springframework.stereotype.Component;
+
+// 빈 컨테이너에 등록해주세요
+@Component
+public class Library {
+
+	// 라이브러리가 북에 의존하는 상태로 만들어주세요
+	// 단 생성자는 void 생성자(아무것도 입력받지 않고 아무것도 안 하는)로 만들어주시고
+	
+	// 단 멤버 변수 book에 대한 setter만 만들어주세요(public void setBook(Book book))
+	private Book book;
+	
+	
+}

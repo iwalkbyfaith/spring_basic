@@ -3,7 +3,9 @@ package com.ict.controller.di;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.ict.controller.di.classfile.BalladSinger;
+import com.ict.controller.di.classfile.Book;
 import com.ict.controller.di.classfile.Broadcast;
+import com.ict.controller.di.classfile.Library;
 import com.ict.controller.di.classfile.PopSinger;
 import com.ict.controller.di.classfile.Singer;
 import com.ict.controller.di.classfile.Stage;
@@ -15,10 +17,30 @@ public class DiMainSpringVer {
 		// root-context라는 공장에 저장된 객체를 뽑아서 써야합니다.
 		// 1. 가져오기 위한 호출 코드를 작성해보겠습니다.
 		
-		// 호출코드
+//		// 호출코드
+//		GenericXmlApplicationContext context = 
+//				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml");
+		
+		// ■ 03.29 추가) xml 쪼개기
+		// 방법1 경로 연달아 집어넣기
+//		GenericXmlApplicationContext context = 
+//				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml", 
+//												 "file:src/main/webapp/WEB-INF/spring/root-context2.xml");
+		
+		// 방법2 문자 배열로 만들어서 ??? 이거 다시 보기
+//		String[] address = {"file:src/main/webapp/WEB-INF/spring/root-context.xml", 
+//				 "file:src/main/webapp/WEB-INF/spring/root-context2.xml"};
+//			
+//		GenericXmlApplicationContext context = new GenericXmlApplicationContext(address);
+		
+		
+//		GenericXmlApplicationContext context = 
+//		new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml");
+		
+		
+		// 방법3 와일드카드 별 활용하기 (root-로 시작하는 모든 애들 들어가기 가능) -> 보통 많이씀
 		GenericXmlApplicationContext context = 
-				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-context.xml");
-//		
+				new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/root-*.xml");
 //		
 //		// 2. 공장 내부 객체 가져오기
 //		// 문법 : context.getBean("공장 내부 명칭", 클래스파일명.class(설계도));
@@ -61,19 +83,25 @@ public class DiMainSpringVer {
 //		PopSinger ps1 = context.getBean("popSinger", PopSinger.class);
 //		ps1.sing();
 		
+//		
+//		// 7. 수동생성 bean인 stage1, stage2 가져와서 사용하기
+//		// context.getBean("빈 컨테이너 안에 있는 이름", 설계도로 쓸 파일.class)
+//		System.out.println("-----수동으로 만든 스테이지--------");
+//		
+//		// 수동으로 만든 stage1
+//		Stage stage1 = context.getBean("stage1", Stage.class);
+//		stage1.perform();
+//		
+//		// 수동으로 만든 stage2
+//		Stage stage2 = context.getBean("stage2", Stage.class);
+//		stage2.perform();
+//		
+
+		// 03.29 추가
+		// ■ setter 주입 <= 을 사용해보기 위한 코드 (나중에 library1을 만들고 library 대신 1을 넣어봄)
 		
-		// 7. 수동생성 bean인 stage1, stage2 가져와서 사용하기
-		// context.getBean("빈 컨테이너 안에 있는 이름", 설계도로 쓸 파일.class)
-		System.out.println("-----수동으로 만든 스테이지--------");
-		
-		// 수동으로 만든 stage1
-		Stage stage1 = context.getBean("stage1", Stage.class);
-		stage1.perform();
-		
-		// 수동으로 만든 stage2
-		Stage stage2 = context.getBean("stage2", Stage.class);
-		stage2.perform();
-		
+		Library library = context.getBean("library1", Library.class);
+		library.browse();
 		
 		
 		
