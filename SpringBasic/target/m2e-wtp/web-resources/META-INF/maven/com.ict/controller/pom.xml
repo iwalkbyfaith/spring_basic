@@ -131,6 +131,16 @@
 		    <version>18.15.0.0</version>
 		</dependency>
 		
+		<!-- 03.31 롬복lombok 설정 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.22</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
 		
 		       
 	</dependencies> <!-- 여기가 디펜던시즈 닫히는 부분 (메이븐 저장소에서 가져오는 주소들 이 위로 넣으면 됨) -->
