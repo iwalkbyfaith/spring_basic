@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ict.mapper.TimeMapper;
+import com.ict.time.mapper.TimeMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -21,12 +21,23 @@ public class TimeMapperTests {
 	@Autowired
 	private TimeMapper timeMapper;
 	
-	@Test
+	//@Test
 	public void testGetTime() {
 		log.info("현재 시간 조회중...");
 		log.info(timeMapper.getTime());
 	}
 	
+	
+	// 04.05
+	// testGetTime2()를 만들어서 timeMapper의 getTime2를 호출해주세요.
+	// 시간이 잘 찍히는지 확인까지.
+	
+	@Test
+	public void testGetTime2() {
+		log.info("testGetTime2()로 시간 조회 <-------------------");
+		log.info(timeMapper.getTime2());
+	}
+
 	
 
 }
