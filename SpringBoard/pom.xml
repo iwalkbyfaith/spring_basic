@@ -80,7 +80,9 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
+			<!-- 04.07 : org.apache.log4j.Logger cannot be resolved to a type 에러로 인해 주석처리
 			<scope>runtime</scope>
+			-->
 		</dependency>
 
 		<!-- @Inject -->

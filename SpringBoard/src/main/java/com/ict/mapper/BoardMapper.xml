@@ -59,7 +59,11 @@
 		
 		<!-- ■ UPDATE2 : row 한 개 수정하기 (BoardVO 받음) -->
 		<update id="updateBoard2">
-			UPDATE board_tbl SET title=#{title}, content=#{content}, writer=#{writer} WHERE bno=#{bno}
+			UPDATE board_tbl 
+				SET	
+			title=#{title}, content=#{content}, updatedate=SYSDATE 
+				WHERE 
+			bno=#{bno}
 		</update>
 	
 	

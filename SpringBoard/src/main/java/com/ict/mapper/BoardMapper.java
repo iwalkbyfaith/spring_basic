@@ -16,11 +16,11 @@ public interface BoardMapper {
 		// 2. 메서드 이름이 뭔지 생각하면 된다 (추상 메서드 배치)
 	
 	
-	// ■ Select ("SELECT * FROM board_tbl WHERE bno < 4")
+	// ■ SELECT ("SELECT * FROM board_tbl WHERE bno < 4" -> 에서 나중에 바꿈)
 	public List<BoardVO> getList();
 	
 	
-	// ■ insert
+	// ■ INSERT
 	// insert 구문 실행용으로 메서드를 선언합니다.
 	// VO 내부에 적혀있는 정보를 이용해 insert를 합니다. (String title, Strimng content... 이렇게 받아도 됨)
 	// 파라미터값이 여러개인 경우는 vo를 쓰고, 1개/2개 밖에 안되면 그냥 각각 쓰는게 나을 듯 하다.
@@ -37,9 +37,10 @@ public interface BoardMapper {
 	
 	
 	// ■ UPDATE (혼자 실습, 해당 글 번호 게시글 수정 - title, bno 받음)
+		// 두 개 이상의 파라미터를 따로따로 전달할때는 각 파라미터 왼쪽에 @Param을 붙여줍니다.
 	public void updateBoard(@Param("title")String title, @Param("bno")long bno);
 	
-	// ■ UPDATE2 (혼자 실습, 해당 글 번호 게시글 수정 - vo로 받음)
+	// ■ UPDATE2 (해당 글 번호 게시글 수정 - vo로 받음) (전달 변수가 ★2개 이상★이면 vo를 쓰기! -> 권장)
 	public void updateBoard2(BoardVO vo);
 	
 	

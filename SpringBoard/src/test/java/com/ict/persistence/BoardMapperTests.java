@@ -74,14 +74,21 @@ public class BoardMapperTests {
 		boardMapper.updateBoard("글제목수정", 4);
 	}
 	
-	@Test // 한 개의 글 수정하기 (BoardVO 받음)
+	//@Test // 한 개의 글 수정하기 (BoardVO 받음)
 	public void testUpdateBoard2() {
 		BoardVO vo = new BoardVO();
 		
+			// 디버깅
+			log.info("전달 데이터가 아직 입력 되기 전 vo : " + vo);
+		
+		// setter로 전달
 		vo.setTitle("vo로바꾼제목");
 		vo.setContent("vo로 바꾼 내용");
-		vo.setWriter("vo로바꾼글쓴이");
-		vo.setBno(26);
+		vo.setBno(5);
+		
+			// 디버깅
+			log.info("전달 데이터가 입력 된 후의 vo : " + vo);
+		
 		
 		boardMapper.updateBoard2(vo);
 	}
