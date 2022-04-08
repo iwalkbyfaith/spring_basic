@@ -10,34 +10,40 @@
 </head>
 <body>
 	
-	잘 들어왔나 확인 : 	${boardList}
 	
-	<hr/><br/>
-	
-	<table class="table table-striped">
-	
-		<thead>
-			<tr>
-				<th>글 번호</th>
-				<th>제목</th>
-				<th>글쓴이</th>
-				<th>작성일</th>
-				<th>수정일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="board" items="${boardList}">
+	<div class="container">
+		<br/><h1>보드 리스트</h1><br/>
+		<table class="table table-striped">
+		
+			<thead>
 				<tr>
-					<td>${board.bno}</td>
-					<td><a href="http://localhost:8181/boardList/${board.bno}">${board.title}</a></td>
-					<td>${board.writer}</td>
-					<td>${board.regdate}</td>
-					<td>${board.updatedate}</td>
+					<th>글 번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>작성일</th>
+					<th>수정일</th>
 				</tr>
-			</c:forEach>
-		</tbody>
+			</thead>
+			<tbody>
+				<c:forEach var="board" items="${boardList}">
+					<tr>
+						<td>${board.bno}</td>
+						<td><a href="http://localhost:8181/boardList/${board.bno}">${board.title}</a></td>
+						<td>${board.writer}</td>
+						<td>${board.regdate}</td>
+						<td>${board.updatedate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		
+		</table>
 	
-	</table>
+
+		<!-- <a href="/boardInsert"><button>글 쓰기</button></a>  -->
+		<!-- 이런 방법도 있음 (부트스트랩 적용시) -->
+		<a href="/boardInsert" class="btn btn-success">글쓰기</a>
+		
+	</div>
 
 </body>
 </html>

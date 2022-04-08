@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ict.domain.BoardVO;
 import com.ict.mapper.BoardMapper;
@@ -15,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 
 
 
-// 컨트롤러가 컨트롤러 기능을 할 수 있도록 처리해주세요 (어노테이션 붙이면 됨)
+// 컨트롤러가 컨트롤러 기능을 할 수 있도록 처리해주세요 (컨트롤러 어노테이션 붙이면 됨)
 
 
 @Controller
@@ -56,6 +57,73 @@ public class BoardController {
 	}
 	
 	
+	
+	// ■ 게시글 적재 (폼)
+	@GetMapping("/boardInsert")
+	public String insertBoardForm() {
+		
+		return "boardForm";
+	}
+	
+	
+	// ■ 게시글 적재 (DB에 적재)
+	@PostMapping("/boardInsert")
+	public String insertBoardToDB(BoardVO vo) {
+		
+		// 디버깅
+		log.info("들어온 BoardVO 데이터 체크 -> " + vo);
+		
+		// DB에 적재
+		boardMapper.insert(vo);
+		
+		return "redirect:/boardList";
+	}
+	
+	// ★ 리다이렉트하기 : return "redirect:/주소";
+	
+	
+	
+	// ■ 게시글 삭제
+	@PostMapping("/boardDelete")
+	public String deleteBoard(long bno) {
+		
+		// 디버깅
+		log.info("들어온 게시글 번호 -> " + bno);
+		
+		// 글 삭제
+		boardMapper.deleteBoard(bno);
+		
+		return "redirect:/boardList";
+	}
+	
+	
+	
+	// ■ 게시글 수정 (폼)
+	@PostMapping("/boardUpdateForm")
+	public String updateBoard(long bno, Model model) {
+		
+		// 디버깅
+		log.info("들어온 게시글 번호 -> " + bno);
+		
+		// 해당 게시글 바인딩
+		model.addAttribute("board", boardMapper.getBoard(bno));
+		
+		return "boardUpdateForm";
+	}
+	
+	
+	// ■ 게시글 수정 ( DB에 반영 )
+	@PostMapping("/boardUpdate")
+	public String updateBoardToDB(BoardVO vo) {
+		
+		// 디버깅
+		log.info("변경 사항 -> " + vo);
+		
+		// 수정
+		boardMapper.updateBoard2(vo);
+		
+		return "redirect:/boardList/" + vo.getBno();
+	}
 	
 	
 	

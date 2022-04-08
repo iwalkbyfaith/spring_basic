@@ -344,7 +344,7 @@ public class BasicController {
 		public String getUserInfo(UserVO userVO, Model model) {
 			
 			// 변수명은 userVO로 지정했으나, 실제로는 내부 멤버 변수의 이름으로 데이터를 받습니다.
-				// ?userVO=1 <- 이런식으로 하지 않는다는 것.
+				// ?userVO=1 <- 이런식으로 받아지지 않는다.
 				// ?userNum=1&userId=123... 이런 식으로 입력 받는 것
 			model.addAttribute("user", userVO);
 			

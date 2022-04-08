@@ -3,6 +3,7 @@ package com.ict.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.ict.domain.BoardVO;
 
@@ -16,8 +17,13 @@ public interface BoardMapper {
 		// 2. 메서드 이름이 뭔지 생각하면 된다 (추상 메서드 배치)
 	
 	
-	// ■ SELECT ("SELECT * FROM board_tbl WHERE bno < 4" -> 에서 나중에 바꿈)
+	// ■ SELECT ("SELECT * FROM board_tbl WHERE bno < 4" -> 에서 나중에 바꿈";)
 	public List<BoardVO> getList();
+	
+
+	
+//	@Select("SELECT now()")
+//	public String getTime();
 	
 	
 	// ■ INSERT

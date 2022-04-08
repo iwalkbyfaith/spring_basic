@@ -21,7 +21,7 @@ public class BoardMapperTests {
 	
 	
 	
-	//@Test // 모든 글 리스트
+	@Test // 모든 글 리스트
 	public void getBoardList() {
 		log.info("getBoardList() 실행");
 		log.info(boardMapper.getList());
