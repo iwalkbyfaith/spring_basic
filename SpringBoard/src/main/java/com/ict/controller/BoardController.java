@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ict.domain.BoardVO;
 import com.ict.mapper.BoardMapper;
@@ -36,25 +37,27 @@ public class BoardController {
 		// 전체 글 목록을 볼 수 있는 페이지인 boardList.jsp
 		// 주소 : /boardList 주소를 get 방식으로 선언해주세요
 	@GetMapping("/boardList")
-	public String getBoardList(Model model) {
+	public String getBoardList(@RequestParam(defaultValue="1")long pageNum, Model model) {
+		
 		
 		// List<BoardVO> list = boardMapper.getList();로 받아서 list만 바인딩 값으로 넣어도 된다
 		
 		// 바인딩
-		model.addAttribute("boardList", boardMapper.getList());
+		model.addAttribute("boardList", boardMapper.getList(pageNum));
 		
 		return "boardList";
 	}
 	
 	
 	// ■ 상세 글 보기
-	@GetMapping("/boardList/{bno}")
+	@GetMapping("/boardDetail/{bno}")
 	public String getBoardDetail(@PathVariable long bno, Model model) {
 		
 		model.addAttribute("board", boardMapper.getBoard(bno));
 		
 		return "boardDetail";
 	}
+	
 	
 	
 	
@@ -124,8 +127,6 @@ public class BoardController {
 		
 		return "redirect:/boardList/" + vo.getBno();
 	}
-	
-	
 	
 	
 

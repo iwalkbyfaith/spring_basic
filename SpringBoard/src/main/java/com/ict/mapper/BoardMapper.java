@@ -17,8 +17,8 @@ public interface BoardMapper {
 		// 2. 메서드 이름이 뭔지 생각하면 된다 (추상 메서드 배치)
 	
 	
-	// ■ SELECT ("SELECT * FROM board_tbl WHERE bno < 4" -> 에서 나중에 바꿈";)
-	public List<BoardVO> getList();
+	// ■ SELECT 
+	public List<BoardVO> getList(long pageNum);
 	
 
 	
