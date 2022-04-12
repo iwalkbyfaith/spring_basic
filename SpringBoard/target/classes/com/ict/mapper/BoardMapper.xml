@@ -22,13 +22,15 @@
 		
 		
 		<!-- 04.11 페이징처리를 위한 변경 -->
+		<!-- 04.12 getter는 #{}내부에서 호출가능하다. get을 뺀 나머지 메서드명을 적어주면 됨 (메서드 위치 : Criteria.java)
+			       getter를 가져왔을때 맨 앞글자는 무조건 소문자로 쓴다 ★ -->
 		<!-- ■ SELECT : 모든 리스트 받아오기 -->
 		<select id="getList" resultType="com.ict.domain.BoardVO">
 			<![CDATA[
 				SELECT * FROM
 					(SELECT /*+ INDEX_DESC(board_tbl pk_board) */
-					rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= (#{pageNum} * 10))
-						WHERE rn > ((#{pageNum}-1) * 10)
+					rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= #{pageEnd})
+						WHERE rn > #{pageStart}
 			]]>
 		</select>
 		
@@ -68,6 +70,12 @@
 				WHERE 
 			bno=#{bno}
 		</update>
+	
+	
+		<!-- ■ 전체 글 개수 가져오기 -->
+		<select id="countPageNum" resultType="int">
+			SELECT COUNT(*) FROM board_tbl
+		</select>
 	
 	
 	

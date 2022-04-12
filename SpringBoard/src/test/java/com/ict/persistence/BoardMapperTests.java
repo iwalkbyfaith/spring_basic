@@ -62,7 +62,7 @@ public class BoardMapperTests {
 	}
 	
 	
-	// @Test // 한개의 글 삭제하기
+	 //@Test // 한개의 글 삭제하기
 	public void testDeleteBoard() {
 		
 		boardMapper.deleteBoard(23);

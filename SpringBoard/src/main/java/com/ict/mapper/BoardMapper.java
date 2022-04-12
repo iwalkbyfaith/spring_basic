@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.ict.domain.BoardVO;
+import com.ict.domain.Criteria;
 
 public interface BoardMapper {
 
@@ -18,8 +19,10 @@ public interface BoardMapper {
 	
 	
 	// ■ SELECT 
-	public List<BoardVO> getList(long pageNum);
-	
+	//public List<BoardVO> getList(long pageNum);
+	// 04.12 변경
+		// 버튼 추가를 위해 PageNum 대신 Criteria를 활용합니다.
+	public List<BoardVO> getList(Criteria cri);
 
 	
 //	@Select("SELECT now()")
@@ -48,6 +51,11 @@ public interface BoardMapper {
 	
 	// ■ UPDATE2 (해당 글 번호 게시글 수정 - vo로 받음) (전달 변수가 ★2개 이상★이면 vo를 쓰기! -> 권장)
 	public void updateBoard2(BoardVO vo);
+	
+	
+	// 04.12
+	// ■ 전체 글 개수 받아오기
+	public int countPageNum();
 	
 	
 	
