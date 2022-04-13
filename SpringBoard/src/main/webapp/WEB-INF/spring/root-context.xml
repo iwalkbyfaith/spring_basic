@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
@@ -40,6 +42,11 @@
 	<!-- 22.04.05 -->
 	<!-- com.ict.mapper 패키지를 새로 생성후 BoardMapper 인터페이스와 xml 파일을 생성만 해주세요 -->
 	<mybatis-spring:scan base-package="com.ict.mapper"/>
+	
+	
+	<!-- 22.04.13 컴포넌트 스캔 -->
+	<context:component-scan base-package="com.ict.service"/>
+	<!-- com.ict.*을 하면 ict.블라블라 하는 애들 다 집어 넣어줌. 근데 그떄그때 넣는걸 선호한다고 하심 -->
 	
 	
 

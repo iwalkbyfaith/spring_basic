@@ -39,10 +39,16 @@
 	
 		<div class="row">
 		
-			<div class="col-md-9">
+			<div class="col-md-1">
 				<!-- <a href="http://localhost:8181/boardList"><button>글 목록</button></a>  -->
 				<!-- 부트스트랩 적용하면 아래와 같이도 가능 -->
 				<a href="/boardList" class="btn btn-success">글 목록</a>
+			</div>
+			
+			<div class="col-md-8">
+				<!-- <a href="http://localhost:8181/boardList"><button>글 목록</button></a>  -->
+				<!-- 부트스트랩 적용하면 아래와 같이도 가능 -->
+				<a href="/boardList" class="btn btn-success">뒤로가기(아직연결안함)</a>
 			</div>
 			
 			<div class="col-md-2">

@@ -21,15 +21,15 @@ public class BoardMapperTests {
 	
 	
 	
-	@Test // 모든 글 리스트
-	public void getBoardList(long pageNum) {
-		log.info("getBoardList() 실행");
-		log.info(boardMapper.getList(pageNum));
-		
-		// 이렇게 해도 됨
-		// List<BoardVO> result = boardMapper.getList();
-		// log.info("저장된 게시물 정보 : " + result);
-	}
+//	@Test // 모든 글 리스트
+//	public void getBoardList(long pageNum) {
+//		log.info("getBoardList() 실행");
+//		log.info(boardMapper.getList(pageNum));
+//		
+//		// 이렇게 해도 됨
+//		// List<BoardVO> result = boardMapper.getList();
+//		// log.info("저장된 게시물 정보 : " + result);
+//	}
 	
 	//@Test // 데이터 적재
 	public void testInsert() {

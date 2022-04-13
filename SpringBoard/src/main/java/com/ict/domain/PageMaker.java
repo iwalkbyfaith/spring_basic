@@ -17,8 +17,10 @@ public class PageMaker {
 	
 	// 아래에 메서드에서 사용하기 위해서 Criteria가 필요하다
 		// 현재 조회중인 페이지 정보 + 한 페이지에 깔리는 글 수 받아와야함.
-	private Criteria cri;
+	//private Criteria cri;
 	
+	// 04.13 검색창 만들기 위해 변경 Criteria -> SearchCriteria(검색 타입, 검색 키워드)
+	private SearchCriteria cri;
 	
 	
 	// ■ 필요한 모든 사항을 계산해주는 메서드 (시작버튼, 끝버튼, 버튼 몇 개 깔지 ... )
