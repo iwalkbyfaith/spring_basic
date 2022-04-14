@@ -26,11 +26,11 @@
 			</thead>
 			<tbody>
 				<c:forEach var="board" items="${boardList}">
-					<tr>
+					<tr> 
 						<td>${board.bno}</td> <!-- 04.13 검색창 추가 후, 바로 밑의 코드에 bno 이후에 searchType과 keyword 추가해줌 (얘는 @PathVariable이어서 /슬래시가 아니라 ?물음표로 처리 -->
 						<!-- 04.13 검색창 생성 후 주소값 수정) 글 수정, 삭제했을때 그 페이지에 붙어있게 하기 위해 --> 
 						<!-- <td><a href="http://localhost:8181/boardDetail/${board.bno}">${board.title}</a></td> -->
-						<td><a href="http://localhost:8181/boardDetail/${board.bno}?searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title}</a></td>
+						<td><a href="http://localhost:8181/boardDetail/${board.bno}?pageNum=${pageMaker.cri.pageNum}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title}</a></td>
 						<td>${board.writer}</td>
 						<td>${board.regdate}</td>
 						<td>${board.updatedate}</td>
@@ -180,7 +180,7 @@
 	
 --%>	
 	
-	■ 시도5) 04.13 페이지를 넘길 때 키워드도 같이 넘어가게 만들어야함 ( 검색창 & 페이지네이션 같이 구현)
+	■ 시도5) 04.13 페이지를 넘길 때 키워드도 같이 넘어가게 만들어야함 ( 검색창 & 페이지네이션 같이 구현 ) <br/><br/>
 	<nav aria-label="navi">
 	  <ul class="pagination justify-content-center">
 	  	<!-- ● 이전 페이지 버튼 -->
@@ -220,17 +220,16 @@
 	
 	<!-- 04.13 검색창 생성 -->
 	
-	<div class="row">
+	<div class="row" style="text-align:center">
 		<form action="/boardList" method="get">
 			<!-- select 태그를 이용해, 클릭해서 검색조건을 선택할 수 있도록 처리합니다. -->
 			<!-- selected를 넣어주면 검색창에 뜨는 디폴트값으로 적용된다 -->
 			<select name="searchType">
-				<option value="n">-</option> <!-- 여기는 사실 처리해 줄 필요가 없음. 밑에 selected가 된게 없으면 맨 위에 것이 제일 디폴트로 잡히기 때문에. 원래 처리해주려면 null이거나 n이거나를 다 처리해주어야한다. -->
+				<option value="n">-</option> <!-- 여기는 사실 처리해 줄 필요가 없음. 밑에 selected가 된게 없으면 맨 위에 것이 디폴트로 잡히기 때문에. 그래도 처리해주고 싶다면 null이거나 n이거나를 다 처리해주어야한다. -->
 				<option value="t" ${pageMaker.cri.searchType eq 't' ? 'selected' : ''}>제목</option>
 				<option value="c" ${pageMaker.cri.searchType eq 'c' ? 'selected' : ''}>본문</option>
 				<option value="w" ${pageMaker.cri.searchType eq 'w' ? 'selected' : ''}>글쓴이</option>
 				<option value="tc" ${pageMaker.cri.searchType eq 'tc' ? 'selected' : ''}>제목+본문</option>
-				<option value="tw" ${pageMaker.cri.searchType eq 'tw' ? 'selected' : ''}>제목+글쓴이</option>
 				<option value="cw" ${pageMaker.cri.searchType eq 'cw' ? 'selected' : ''}>본문+글쓴이</option>
 				<option value="tcw" ${pageMaker.cri.searchType eq 'tcw' ? 'selected' : ''}>제목+본문+글쓴이</option>
 			</select>

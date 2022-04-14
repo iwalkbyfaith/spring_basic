@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	
+	// private int rn (테스트코드 작성할때 거슬리면 추가하면 됨. 안 작성하면 unread라고 나옴)
 	private long bno;       // 게시글 수가 21억 이상일 것 같으면 long
 	private String title;
 	private String content;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
+import com.ict.domain.SearchCriteria;
 
 // 구현 클래스 BoardServiceImpl의 뼈대가 됨
 // root-context.xml에서 컴포넌트 스캔까지 완료해야 등록됨
@@ -19,10 +20,12 @@ public interface IBoardService {
 	// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	
 	// ■ 게시판 리스트 보기
-	public List<BoardVO> getList(Criteria cri);
+	//public List<BoardVO> getList(Criteria cri);
+	public List<BoardVO> getList(SearchCriteria cri);
 	
-	// ■ 전체 글 개수 받아오기
-	public int countPageNum();
+	// ■ 전체 글 개수 받아오기 (04.14 수정)
+	//public int countPageNum();
+	public int countPageNum(SearchCriteria cri);
 	
 	// ■ 디테일 페이지 보기
 	public BoardVO getBoard(long bno);

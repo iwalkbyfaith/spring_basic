@@ -29,11 +29,7 @@
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="com.ict.mapper.BoardMapper"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.ict.domain.BoardVO"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="com.ict.controller.BoardController"/>
     <fullyQualifiedTypeName name="lombok.extern.log4j.Log4j"/>
@@ -41,7 +37,14 @@
     <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-    <fullyQualifiedTypeName name="com.ict.domain.Criteria"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="com.ict.domain.PageMaker"/>
+    <fullyQualifiedTypeName name="com.ict.mapper.BoardMapper"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.ict.domain.BoardVO"/>
+    <fullyQualifiedTypeName name="com.ict.domain.Criteria"/>
+    <fullyQualifiedTypeName name="com.ict.service.IBoardService"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="com.ict.domain.SearchCriteria"/>
 </qualifiedTypeNameHistroy>

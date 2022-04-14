@@ -17,20 +17,80 @@
 	 resultType -> SELECT에만 있음, 마이바티스 태그 내에서는 리스트를 안 적어줘도 됨(인터페이스의 메서드에서만 잘 표시해주면 됨)
  -->
 
-	<!-- BoardMapper(인터페이스)와 연결해줌 -->
+	<!-- ■ BoardMapper(인터페이스)와 연결해줌 -->
 	<mapper namespace="com.ict.mapper.BoardMapper">
 		
 		
 		<!-- 04.11 페이징처리를 위한 변경 -->
 		<!-- 04.12 getter는 #{}내부에서 호출가능하다. get을 뺀 나머지 메서드명을 적어주면 됨 (메서드 위치 : Criteria.java)
 			       getter를 가져왔을때 맨 앞글자는 무조건 소문자로 쓴다 ★ -->
-		<!-- ■ SELECT : 모든 리스트 받아오기 -->
+		<!-- ■ SELECT : 모든 리스트 받아오기 
 		<select id="getList" resultType="com.ict.domain.BoardVO">
 			<![CDATA[
 				SELECT * FROM
 					(SELECT /*+ INDEX_DESC(board_tbl pk_board) */
 					rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= #{pageEnd})
 						WHERE rn > #{pageStart}
+			]]>
+		</select>
+		-->
+		
+		<!-- ■ 04.14 조건별 SQL(동적SQL)을 위한 <sql>, <include> 태그 추가 -->
+		<!-- getList와 countPageNum에 같은 코드를 두 번 반복해야 했었는데,
+			 <sql>에 해당하는 코드를 만들어놓고 <include>코드만 getList와 countPageNum에 추가해주면 된다 (깔끔ㅎ_ㅎ) -->
+		<sql id="search">
+			<if test="searchType != null">
+				<if test="searchType == 't'.toString()">   <!-- title -->
+					(TITLE like '%'||#{keyword}||'%') AND
+				</if>
+				<if test="searchType == 'c'.toString()">   <!-- content -->
+					(CONTENT like '%'||#{keyword}||'%') AND
+				</if>
+				<if test="searchType == 'w'.toString()">   <!-- writer -->
+					(WRITER like '%'||#{keyword}||'%') AND
+				</if>
+				<if test="searchType == 'tc'.toString()">  <!-- title + content -->
+					((TITLE like '%'||#{keyword}||'%')
+						OR
+					(CONTENT like '%'||#{keyword}||'%')) AND
+				</if>
+				<if test="searchType == 'cw'.toString()">  <!-- content + writer -->
+					((CONTENT like '%'||#{keyword}||'%')
+						OR
+					(WRITER like '%'||#{keyword}||'%')) AND
+				</if>
+				<if test="searchType == 'tcw'.toString()"> <!-- title + content + writer -->
+					((TITLE like '%'||#{keyword}||'%')
+						OR
+					(CONTENT like '%'||#{keyword}||'%')
+						OR
+					(WRITER like '%'||#{keyword}||'%')) AND
+				</if>	
+			</if>	
+		</sql>
+		
+		
+		
+		
+		<!-- ■ SELECT : 모든 리스트 받아오기 -->
+		<!-- 04.14 페이징처리 + 동적SQL 구문 추가  -->
+		<select id="getList" resultType="com.ict.domain.BoardVO">
+			<![CDATA[
+				SELECT * FROM
+					(SELECT /*+ INDEX_DESC(board_tbl pk_board) */
+					rownum rn, board_tbl.* FROM board_tbl WHERE
+			]]>		
+			
+			<!-- 조건에 따른 쿼리문이 가변적으로 추가될 부분.
+				 이 쿼리문을 돌리면서 SearchCriteria를 돌리고 있으므로 SearchCriteria.searchType을 아래처럼 변수명만 적어 감지 가능. -->
+			
+			<!-- ● 상단의 sql 태그를 이용해 명칭을 부여했으므로, 명칭만 맞추면 긴 내용을 다 넣지 않아도 된다. (id=search와 연결됨) -->
+			<include refid="search"/>
+					
+			<!-- ● 글 번호를 조절하기 위한 부분 -->		
+			<![CDATA[		
+					 rownum <= #{pageEnd})
+					 WHERE rn > #{pageStart}
 			]]>
 		</select>
 		
@@ -72,9 +132,18 @@
 		</update>
 	
 	
-		<!-- ■ 전체 글 개수 가져오기 -->
+		<!-- ■ 04.14 수정 전체 글 개수 가져오기 --> 
+		<!-- WHERE을 밖으로 빼면 조건이 없는 경우에 에러가 날 수 있으므로 WHERE 조건에 영향을 주지 않는 bno > 0를 넣어
+			 조건절이 들어오지 않는 경우도 커버하는 것 (그냥 문법을 맞추기 위해 넣은 것.)-->
 		<select id="countPageNum" resultType="int">
-			SELECT COUNT(*) FROM board_tbl
+			SELECT COUNT(*) FROM board_tbl WHERE
+			
+			<!-- ● 글 개수 조회 구문에도 include 태그 입력(id=search와 연결) -->
+			<include refid="search"/>
+			
+			<![CDATA[		
+			bno > 0		
+			]]>	
 		</select>
 	
 	

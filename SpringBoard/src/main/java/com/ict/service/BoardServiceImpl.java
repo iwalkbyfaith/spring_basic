@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
+import com.ict.domain.SearchCriteria;
 import com.ict.mapper.BoardMapper;
 
 // 1. IBoardService 인터페이스 구현 ( implements 사용 )
@@ -28,18 +29,30 @@ public class BoardServiceImpl implements IBoardService{
 	
 	
 	// ● 모든 게시글 가져오기(페이징처리 됨)
+//	@Override
+//	public List<BoardVO> getList(Criteria cri) {
+//		
+//		// 원래 컨트롤러에서 호출하던 getList를 서비스로 옮긴 것
+//		return boardMapper.getList(cri);
+//	}
+	
 	@Override
-	public List<BoardVO> getList(Criteria cri) {
+	public List<BoardVO> getList(SearchCriteria cri) {
 		
 		// 원래 컨트롤러에서 호출하던 getList를 서비스로 옮긴 것
 		return boardMapper.getList(cri);
 	}
 
 	
-	// ● 전체 페이지 가져오기?
+	// ● 전체 페이지 가져오기? (04.14 밑의 코드로 수정)
+//	@Override
+//	public int countPageNum() {
+//		return boardMapper.countPageNum();
+//	}
+	
 	@Override
-	public int countPageNum() {
-		return boardMapper.countPageNum();
+	public int countPageNum(SearchCriteria cri) {
+		return boardMapper.countPageNum(cri);
 	}
 
 

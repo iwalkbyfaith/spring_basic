@@ -115,7 +115,32 @@ public class BoardController {
 //	}
 	
 	
-	// 04.13 페이지네이션&검색기능을 위해 Criteria -> SearchCriteria로 변경
+//	// 04.13 페이지네이션&검색기능을 위해 Criteria -> SearchCriteria로 변경
+//	@GetMapping("/boardList")
+//	public String getBoardList(SearchCriteria cri, Model model) {
+//		
+//		// List<BoardVO> list = boardMapper.getList();로 받아서 list만 바인딩 값으로 넣어도 된다
+//		
+//		// 바인딩
+//		model.addAttribute("boardList", service.getList(cri));
+//		
+//		// 페이지네이터 그리기 위해 처리 정보도 같이 전달하기
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);    					          // setter를 이용해 cri입력
+//		//pageMaker.setTotalBoard(131);						  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
+//		// 131 대신 실제로 DB내 글 개수를 받아옴
+//		pageMaker.setTotalBoard(service.countPageNum());  	  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
+//		model.addAttribute("pageMaker", pageMaker);   		  // 세팅된 pageMaker를 바인딩해줌
+//		
+//		// 페이징 버튼 눌렀을때 볼드처리하기 위해서 한번 넘겨보기
+//		// ★ 넘기지 않아도 .jsp에서 pageMaker.cri.pageNum으로 현재 페이지를 확인할 수 있다.
+//		model.addAttribute("currentPage", cri.getPageNum());
+//		
+//		return "boardList";
+//	}
+	
+	
+	// 04.14 검색어에 따라 네비 버튼의 수가 달라지도록 countPageNum에 파라미터 처리
 	@GetMapping("/boardList")
 	public String getBoardList(SearchCriteria cri, Model model) {
 		
@@ -126,11 +151,11 @@ public class BoardController {
 		
 		// 페이지네이터 그리기 위해 처리 정보도 같이 전달하기
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);    					          // setter를 이용해 cri입력
-		//pageMaker.setTotalBoard(131);						  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
+		pageMaker.setCri(cri);    					        	  // setter를 이용해 cri입력
+		//pageMaker.setTotalBoard(131);							  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
 		// 131 대신 실제로 DB내 글 개수를 받아옴
-		pageMaker.setTotalBoard(service.countPageNum());  	  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
-		model.addAttribute("pageMaker", pageMaker);   		  // 세팅된 pageMaker를 바인딩해줌
+		pageMaker.setTotalBoard(service.countPageNum(cri));  	  // calcData() 메서드까지 호출됨 => prev, next, starPage, endPage 세팅됨
+		model.addAttribute("pageMaker", pageMaker);   		 	  // 세팅된 pageMaker를 바인딩해줌
 		
 		// 페이징 버튼 눌렀을때 볼드처리하기 위해서 한번 넘겨보기
 		// ★ 넘기지 않아도 .jsp에서 pageMaker.cri.pageNum으로 현재 페이지를 확인할 수 있다.
@@ -142,18 +167,6 @@ public class BoardController {
 	
 	
 	
-	
-	
-//	// ■ 상세 글 보기
-//	@GetMapping("/boardDetail/{bno}")
-//	public String getBoardDetail(@PathVariable long bno, Model model) {
-//		
-//		model.addAttribute("board", service.getBoard(bno));
-//		
-//		return "boardDetail";
-//	}
-	
-	
 	// ■ 상세 글 보기
 	@GetMapping("/boardDetail/{bno}")
 	public String getBoardDetail(@PathVariable long bno, Model model) {
@@ -162,7 +175,7 @@ public class BoardController {
 		
 		return "boardDetail";
 	}
-	
+
 	
 	
 	

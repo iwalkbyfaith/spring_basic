@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
+import com.ict.domain.SearchCriteria;
 
 public interface BoardMapper {
 
@@ -22,7 +23,8 @@ public interface BoardMapper {
 	//public List<BoardVO> getList(long pageNum);
 	// 04.12 변경
 		// 버튼 추가를 위해 PageNum 대신 Criteria를 활용합니다.
-	public List<BoardVO> getList(Criteria cri);
+	// public List<BoardVO> getList(Criteria cri);
+	public List<BoardVO> getList(SearchCriteria cri);
 
 	
 //	@Select("SELECT now()")
@@ -53,9 +55,10 @@ public interface BoardMapper {
 	public void updateBoard2(BoardVO vo);
 	
 	
-	// 04.12
+	// 04.12 / 04.14 파라미터 받도록 수정
 	// ■ 전체 글 개수 받아오기
-	public int countPageNum();
+	//public int countPageNum();
+	public int countPageNum(SearchCriteria cri);
 	
 	
 	

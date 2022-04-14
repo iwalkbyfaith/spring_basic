@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ict.domain.BoardVO;
+import com.ict.domain.SearchCriteria;
 import com.ict.mapper.BoardMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -93,4 +94,18 @@ public class BoardMapperTests {
 		boardMapper.updateBoard2(vo);
 	}
 
+	// 구문 생성이 어떻게되는지 관측하기 위한 테스트코드
+	@Test
+	public void testSearchGetList() {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setKeyword("테스트");
+		cri.setSearchType("t");
+		
+		boardMapper.getList(cri);
+	}
+	
+	
+	
+	
+	
 }
