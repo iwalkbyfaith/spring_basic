@@ -15,22 +15,22 @@
 	
 		<div class="row">
 			<div class="col-md-2">
-				글 번호 <input type="number" value="${board.bno}" class="form-control"/> 
+				글 번호 <input type="number" value="${board.bno}" class="form-control" readonly/> 
 			</div>
 			<div class="col-md-5">
-				작성일 <input type="text" value="${board.regdate}" class="form-control"/> 
+				작성일 <input type="text" value="${board.regdate}" class="form-control" readonly/> 
 			</div>
 			<div class="col-md-5">
-				수정일 <input type="text" value="${board.updatedate}" class="form-control"/> <br/><br/>
+				수정일 <input type="text" value="${board.updatedate}" class="form-control" readonly/> <br/><br/>
 			</div>
 		
 			<div class="col-md-8">
-				글 제목 <input type="text" size=55 value="${board.title}" class="form-control"/> 
+				글 제목 <input type="text" size=55 value="${board.title}" class="form-control" readonly/> 
 			</div>
 			<div class="col-md-4">
-				글쓴이 <input type="text" value="${board.writer}" class="form-control"/> <br/><br/>
+				글쓴이 <input type="text" value="${board.writer}" class="form-control" readonly/> <br/><br/>
 			</div>
-			<textarea cols=110 rows=20 class="form-control" >${board.content}</textarea> <br/><br/>
+			<textarea cols=110 rows=20 class="form-control" readonly >${board.content}</textarea> <br/><br/>
 		
 		</div><br/>	
 		
@@ -53,14 +53,17 @@
 			<div class="col-md-8">
 				<!-- <a href="http://localhost:8181/boardList"><button>글 목록</button></a>  -->
 				<!-- 부트스트랩 적용하면 아래와 같이도 가능 -->
-				<a href="http://localhost:8181/boardList?pageNum=${param.pageNum}&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-success">뒤로가기</a>
+				<a href="http://localhost:8181/boardList?pageNum=${param.pageNum == null? 1 : param.pageNum}&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-success">뒤로가기</a>
 			</div>
 			<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 			
 			<div class="col-md-2">
-				<!-- 수정 버튼 -->
+				<!-- 수정 버튼 --><!-- 04.15 값 추가 -->
 				<form action="/boardUpdateForm" method="post">
 					<input type="hidden" name="bno" value="${board.bno}"/>
+					<input type="hidden" name="searchType" value="${param.searchType}"/>
+					<input type="hidden" name="keyword" value="${param.keyword}"/>
+					<input type="hidden" name="pageNum" value="${param.pageNum}"/>
 					<input type="submit" value="수정하기" class="btn btn-warning"/>
 				</form>
 			</div>
@@ -68,6 +71,9 @@
 				<!-- 삭제 버튼 -->
 				<form action="/boardDelete" method="post">
 					<input type="hidden" name="bno" value="${board.bno}"/>
+					<input type="hidden" name="searchType" value="${param.searchType}"/>
+					<input type="hidden" name="keyword" value="${param.keyword}"/>
+					<input type="hidden" name="pageNum" value="${param.pageNum}"/>
 					<input type="submit" value="삭제하기" class="btn btn-danger"/>
 				</form>
 			</div>

@@ -1,6 +1,8 @@
 package com.ict.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
@@ -206,20 +209,39 @@ public class BoardController {
 	
 	// ■ 게시글 삭제
 	@PostMapping("/boardDelete")
-	public String deleteBoard(long bno) {
+	public String deleteBoard(long bno, SearchCriteria cri, RedirectAttributes rttr) {
 		
 		// 디버깅
 		log.info("들어온 게시글 번호 -> " + bno);
+		log.info("/boardDelete에서 받은 정보(서치타입, 키워드) -> " + cri);
+		log.info("/boardDelete에서 받은 정보(페이지 번호) -> " + cri.getPageNum());
 		
 		// 글 삭제
 		service.deleteBoard(bno);
+		
+		// ● 04.15 추가) 검색 타입/키워드를 유지한 채로 들어왔던 페이지로 이동하기
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
+			
+//			// ○ 이런 방법도 있다 (해시맵을 사용하는 방법. 참고만 하기)
+//			// rttr.addAllAttributes(Hashmap);으로 전달시 한 번만 호출해 데이터를 전달할 수 있다.
+//			Map<String, Object> parameters = new HashMap<>();
+//			parameters.put("pageNum", cri.getPageNum());
+//			parameters.put("searchType", cri.getSearchType());
+//			parameters.put("keyword", cri.getKeyword());
+//			log.info("전달 직전 : " + parameters);
+//			// 위에 생성한 맵 자료를 전달
+//			rttr.addAllAttributes(parameters);
+		
 		
 		return "redirect:/boardList";
 	}
 	
 	
 	
-	// ■ 게시글 수정 (폼)
+	// ■ 게시글 수정 (폼) 
 	@PostMapping("/boardUpdateForm")
 	public String updateBoard(long bno, Model model) {
 		
@@ -235,13 +257,23 @@ public class BoardController {
 	
 	// ■ 게시글 수정 ( DB에 반영 )
 	@PostMapping("/boardUpdate")
-	public String updateBoardToDB(BoardVO vo) {
+	public String updateBoardToDB(BoardVO vo, SearchCriteria cri, RedirectAttributes rttr) {
 		
 		// 디버깅
 		log.info("변경 사항 -> " + vo);
+		log.info("/boardUpdate에서 확인하기(서치타입, 키워드) -> " + cri);
+		log.info("/boardUpdate에서 확인하기(페이지 번호) -> " + cri.getPageNum());
 		
 		// 수정
 		service.updateBoard2(vo);
+		
+		// ● 04.15 추가) 리다이렉트시 주소창 뒤에 파라미터 쿼리스트링 형식으로 붙여 보내기 
+		// 주소창 뒤에 searchType, keword, pageNum을 붙여서 보내기 위해서 RedirectAttributes 사용
+		// rttr.addAttribute("파라미터명", 전달자료);
+		// rttr.addFlashAttribute()는 넘어간 페이지에서 파라미터를 쓸 수 있도록 전달하는 것으로 둘의 역할이 다르니 주의할 것.
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		return "redirect:/boardDetail/" + vo.getBno();
 	}

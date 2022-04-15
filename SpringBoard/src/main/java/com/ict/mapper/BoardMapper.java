@@ -23,7 +23,7 @@ public interface BoardMapper {
 	//public List<BoardVO> getList(long pageNum);
 	// 04.12 변경
 		// 버튼 추가를 위해 PageNum 대신 Criteria를 활용합니다.
-	// public List<BoardVO> getList(Criteria cri);
+	//public List<BoardVO> getList(Criteria cri);
 	public List<BoardVO> getList(SearchCriteria cri);
 
 	
