@@ -198,6 +198,21 @@
 		    <version>1.16</version>
 		</dependency>
 		
+		<!-- ■ 04.18 jackson-databind-->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.12.2</version>
+		</dependency>
+		
+		<!-- ■ 04.18 jackson-dataformat-xml	-->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    <version>2.12.2</version>
+		</dependency>
+		
 		
 		
 		

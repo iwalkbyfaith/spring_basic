@@ -193,6 +193,33 @@
 		</dependency>		
 		
 		
+		<!-- ■ 04.18 jackson-databind-->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.12.2</version>
+		</dependency>
+		
+		<!-- ■ 04.18 jackson-dataformat-xml : 에러나서 뺐음. 애초에 xml을 안쓸 것(쓰는 회사가 있긴한데 안좋은 회사인듯)
+			 (11:26~11:29) xml이 jason에 비해 코드 줄 수를 많이 잡아먹음 <TestVO>, <mno>, <name>... 이런 태그 안에 데이터를 넣어줌
+			 	      => 경량화된 데이터를 주고받기 위해서 xml -> json으로 넘어가는 추세.
+			 	      => xml과 json은 상호간에 변환이 되는 자료임.
+			 	      일단 버전을 맞췄더니 됐다고 하셔서 일단 넣어봄 => 됨!
+		-->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		    <version>2.12.2</version>
+		</dependency>
+		
+
+		
+
+		
+		
+		
+		
 				
 		
 		
