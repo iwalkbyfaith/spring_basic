@@ -30,7 +30,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-//@RequestMapping("/board")
+@RequestMapping("/board")
 public class BoardController {
 	
 	// 전체 회원을 보려면, 
@@ -166,7 +166,7 @@ public class BoardController {
 		// ★ 넘기지 않아도 .jsp에서 pageMaker.cri.pageNum으로 현재 페이지를 확인할 수 있다.
 		model.addAttribute("currentPage", cri.getPageNum());
 		
-		return "boardList";
+		return "board/boardList";
 	}
 	
 	
@@ -178,7 +178,7 @@ public class BoardController {
 		
 		model.addAttribute("board", service.getBoard(bno));
 		
-		return "boardDetail";
+		return "board/boardDetail";
 	}
 
 	
@@ -188,7 +188,7 @@ public class BoardController {
 	@GetMapping("/boardInsert")
 	public String insertBoardForm() {
 		
-		return "boardForm";
+		return "board/boardForm";
 	}
 	
 	
@@ -202,7 +202,7 @@ public class BoardController {
 		// DB에 적재
 		service.insert(vo);
 		
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	// ★ 리다이렉트하기 : return "redirect:/주소";
@@ -238,7 +238,7 @@ public class BoardController {
 //			rttr.addAllAttributes(parameters);
 		
 		
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	
@@ -253,7 +253,7 @@ public class BoardController {
 		// 해당 게시글 바인딩
 		model.addAttribute("board", service.getBoard(bno));
 		
-		return "boardUpdateForm";
+		return "board/boardUpdateForm";
 	}
 	
 	
@@ -277,7 +277,7 @@ public class BoardController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
-		return "redirect:/boardDetail/" + vo.getBno();
+		return "redirect:/board/boardDetail/" + vo.getBno();
 	}
 	
 	
