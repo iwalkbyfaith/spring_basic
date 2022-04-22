@@ -48,4 +48,21 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/test2")
+	public void agaxOnClickReplyTest() {
+		
+	}
+	
+	@GetMapping("/test3")
+	public void agaxTest3() {
+		
+	}	
+	
+	// ■ 댓글 등록 화면 테스트
+	@GetMapping("/insertTest")
+	public void insertTest() {
+		
+	}
+	
+	
 }
