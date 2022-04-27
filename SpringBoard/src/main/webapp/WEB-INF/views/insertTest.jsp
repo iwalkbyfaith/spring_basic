@@ -3,6 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- ★ 부트스트랩 1. css 복붙 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<!-- ★ 부트스트랩 2. 번들 복붙 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
+	<!-- ■ 04.26 스타일 태그로 모달의 모양을 잡아줌 -->
+	<style> 
+		#modDiv{ 
+			width: 300px;
+			height: 100px;
+			background-color: green;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50px;
+			margin-left: -150px;
+			padding: 10px;
+			z-index: 1000;
+		}
+	</style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -31,6 +53,25 @@
 		<button id="replyAddBtn">댓글 추가</button>
 	
 	</div>
+	
+	<!-- ■ 04.26 모달 창 만들기 -->
+	<!-- modal은 일종의 팝업입니다.
+		 단, 새 창을 띄우지는 않고 css를 이용해, 특정 태그가 조건부로 보이거나 안보이도록 처리해서 마치 창이 새로 띄워지는 것처럼 만듭니다.
+		 따라서 눈에 보이지는 않아도 modal을 구성하는 태그 자체는 화면에 미리 적혀있어야 합니다.
+		 모달 내부는 만들고 싶은대로 만들면 된다.-->
+	
+	<div id="modDiv" style="display:none;">
+		<div class="modal-title"></div>
+		<div>
+			<input type="text" id="reply">
+		</div>
+		<div>
+			<button type="button" id="replyModBtn">수정</button> <!-- 버튼 태그이기 때문에 type="button"을 안 적어도 된다. -->
+			<button type="button" id="replyDelBtn">삭제</button>
+			<button type="button" id="closeBtn">모달창 닫기</button>
+		</div>
+	</div>
+	
 	
 	
 	<!-- ■ '위임' 이벤트 이해를 위한 코드 (삭제 예정) -->
@@ -127,7 +168,7 @@
 		});
 		
 		
-		// ■ 이벤트 위임
+		// ■ 04.26 이벤트 위임       // 여기서 .replyLi를 빼고 button 태그만 입력해도 정상적으로 작동한다.
 		$("#replies").on("click", ".replyLi button", function(){
 			
 			// 1. 클릭한 버튼과 연계된 li 태그를 replyTag 변수에 저장
@@ -147,8 +188,70 @@
 			var reply = replyTag.text();
 				console.log(reply);
 			
-			alert(rno + " : " + reply);
+			//alert(rno + " : " + reply);
+			
+			// ● 04.26 모달 추가
+			$(".modal-title").html(rno);  // modal-title 부분에 글 번호 입력
+			$("#reply").val(reply);		  // reply 영역에 리플 내용을 기입 (수정/혹은 삭제니까)
+			$("#modDiv").show("slow");	  // 버튼 누르면 모달이 열리게 됨
 		});
+		
+		
+		// ● 04.26 모달 창 닫기
+			// 모달은 .show()로 열 수 있고, .hide로 닫을 수 있다.
+		$("#closeBtn").on("click", function(){
+			$("#modDiv").hide("slow");
+		});
+		
+		
+		// ■ 04.26 삭제 버튼 작동
+		$("#replyDelBtn").on("click", function(){
+			let rno = $(".modal-title").html();
+			
+			$.ajax({  // json 형식으로 요청
+				type : 'delete',
+				url : '/replies/' + rno,
+				header : {"X-HTTP-Method-Override" : "DELETE"},
+				dataType : 'text',
+				success : function(result){
+					console.log("result:  " + result);
+					if(result == 'SUCCESS'){
+						alert("삭제되었습니다");		 // 창 띄워주면 좋으니까
+						$("#modDiv").hide("slow");	 // 모달 창 숨기기
+						getAllList(); 				 // 삭제된 댓글 반영한 새 댓글 목록 갱신
+					}
+				}
+			});	
+		});
+		
+		// ■ 04.26 수정 버튼 작동
+		$("#replyModBtn").on("click", function(){
+			let rno = $(".modal-title").html();
+			let reply = $("#reply").val();			// 댓글 내용을 가져와서 넣어줘야 수정 가능
+			
+			$.ajax({
+				type : 'patch', // put으로 해도 됨 (지금 레벨에서는 큰 차이가 없음)
+				url : '/replies/' + rno,
+				header : {
+					"Content-Type" : "application/json", // json 자료를 추가로 입력받기 때문에, json을 쓴다고 명시
+					"X-HTTP-Method-Override" : "PATCH"
+				},
+				contentType : "application/json",
+				data : JSON.stringify({reply:reply}),
+				dataType : 'text',
+				success : function(result){
+					console.log("result: " + result);
+					if(result == 'SUCCESS'){
+						alert("수정 되었습니다");
+						$("#modDiv").hide("slow");
+						getAllList();
+					}
+				}
+				
+			});
+		});
+		
+
 			
 
 	</script>
@@ -168,6 +271,8 @@
 			//console.log(this.html);  // 내부에 있는 요소를 가져옴. 그러나 콘솔에서 함수가 아니라고 에러뜨면서 안 나옴.
 			alert(this + "테스트 클릭 감지");
 		});
+		
+
 	</script>
 
 </body>
