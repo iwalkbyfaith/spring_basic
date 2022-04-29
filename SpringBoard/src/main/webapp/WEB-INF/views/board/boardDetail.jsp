@@ -13,7 +13,7 @@
 	<!-- ■ 04.27 디테일 페이지에 추가하기 위해 insertTest.jsp에서 복붙 -->
 	<style> 
 		#modDiv{ 
-			width: 300px;
+			width: 500px;
 			height: 100px;
 			background-color: green;
 			border : black solid 1px;
@@ -21,10 +21,12 @@
 			top: 50%;
 			left: 50%;
 			margin-top: -50px;
-			margin-left: -150px;
+			margin-left: -250px;
 			padding: 10px;
 			z-index: 1000;
 		}
+		
+		#reply{ width: 450px;}
 	</style>
 	
 
@@ -133,15 +135,19 @@
 			</div>
 			
 			<!-- ■ 댓글 작성 공간 -->
-			<div>
-				<div> <!-- name이 안 적혀도 상관 없음 (빼도 됨) -->
-					댓쓴이 <input type="text" name="replyer" id="newReplyWriter">
-				</div>
-				<div>
-					댓글 <input type="text" name="reply" id="newReply">
-				</div>
-				<button id="replyAddBtn">댓글 추가</button>
-		
+			<div class="row box-box-success">
+				<div class="box-header">
+					<h2 class="text-primary"> 댓글 작성</h2>
+				</div><!-- header 끝 -->
+				<div class="box-body">
+					<strong>Writer</strong>
+					<input type="text" id="newReplyWriter" placeholder="댓쓴이" class="form-control">
+					<strong>Reply</strong>
+					<input type="text" id="newReply" placeholder="댓글 작성" class="form-control">
+				</div><!-- body 끝 -->
+				<div class="box-footer">
+					<button type="button" class="btn btn-success" id="replyAddBtn"> 댓글 작성 </button>
+				</div><!-- footer 끝 -->
 			</div>
 		
 	</div> <!-- div container 태그를 여기로 옮겨서 댓글도 왼쪽에 치우치지 않게 하기 -->
@@ -155,7 +161,7 @@
 		<div id="modDiv" style="display:none;">
 			<div class="modal-title"></div>
 			<div>
-				<input type="text" id="reply">
+				<input type="text" id="reply"">
 			</div>
 			<div>
 				<button type="button" id="replyModBtn">수정</button> <!-- 버튼 태그이기 때문에 type="button"을 안 적어도 된다. -->
@@ -282,6 +288,10 @@
 				// 변수 replyContent를 선언해 거기에 저장해주세요. (힌트 : .siblings("요소명")을 사용)
 				let replyContent = $(this).siblings(".reply");
 				
+					// 다른 방법1) : $(this).prev().text()를 해도 됨 				 (button의 형제 태그인 .reply를 가져오는 것)
+					// 다른 방법2) : $(this).parent().children(".reply").text()    (button의 부모태그의 자식 태그를 가져오기)
+					//			   선생님은 replyContext에 애초에 .text()를 붙이셨고, 나는 아래 reply에 .text()를 붙였다는 차이가 있음
+				
 				console.log(replyTag); // alert를 잠깐 주석처리하면 콘솔창에 뜸
 				
 				// ● 04.27 (댓글 내용 디버깅)
@@ -290,13 +300,13 @@
 			// 2. 글 번호 얻어오기
 				// 원하는 실제 정보는 버튼 태그가 아니라, li 태그에 있다.
 				// 클릭한 버튼과 연계된 li 태그의 data-rno에 든 값을 가져와 변수 rno에 저장하기.
-			var rno = replyTag.attr("data-rno");
+			let rno = replyTag.attr("data-rno");
 				console.log(rno);
 				
 			// 3. 본문 가져오기
-			//var reply = replyTag.text();
+				//var reply = replyTag.text();
 			// ● 04.27 replyTag -> replyContent
-			var reply = replyContent.text();
+			let reply = replyContent.text();
 				console.log(reply);
 			
 			//alert(rno + " : " + reply);
