@@ -30,7 +30,7 @@
 						<td>${board.bno}</td> <!-- 04.13 검색창 추가 후, 바로 밑의 코드에 bno 이후에 searchType과 keyword 추가해줌 (얘는 @PathVariable이어서 /슬래시가 아니라 ?물음표로 처리 -->
 						<!-- 04.13 검색창 생성 후 주소값 수정) 글 수정, 삭제했을때 그 페이지에 붙어있게 하기 위해 --> 
 						<!-- <td><a href="http://localhost:8181/boardDetail/${board.bno}">${board.title}</a></td> -->
-						<td><a href="http://localhost:8181/board/boardDetail/${board.bno}?pageNum=${pageMaker.cri.pageNum}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title}</a></td>
+						<td><a href="http://localhost:8181/board/boardDetail/${board.bno}?pageNum=${pageMaker.cri.pageNum}&searchType=${pageMaker.cri.searchType}&keyword=${pageMaker.cri.keyword}">${board.title} [${board.replycount}]</a></td>
 						<td>${board.writer}</td>
 						<td>${board.regdate}</td>
 						<td>${board.updatedate}</td>
@@ -49,6 +49,8 @@
 
 	<hr/>
 	디버깅용 => ${pageMaker}
+	<hr/>
+	디버깅용2 => ${boardList}
 	<hr/>
 
 	

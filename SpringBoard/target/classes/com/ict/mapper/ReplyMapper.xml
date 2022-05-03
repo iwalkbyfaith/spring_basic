@@ -35,4 +35,12 @@
 	</delete>
 
 
+	<!-- ■ 05.02 특정 댓글 번호의 글번호를 가져오기-->
+	<select id="getBno" resultType="long">			<!-- 내가 board_tbl -> reply_tbl -->
+		SELECT bno FROM reply_tbl
+			WHERE
+		rno = #{rno}
+	</select>
+
+
 </mapper>

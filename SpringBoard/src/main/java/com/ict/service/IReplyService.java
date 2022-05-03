@@ -17,5 +17,7 @@ public interface IReplyService {
 	
 	// ■ 댓글 삭제
 	public void removeReply(Long rno);
+	
+	
 
 }

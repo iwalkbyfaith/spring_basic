@@ -18,4 +18,6 @@ public class BoardVO {
 	private Date regdate;     // Date 타입이 대신 Timestamp를 쓰면 훨씬 더 정교한 시간을 표현 가능
 	private Date updatedate;
 
+	// 05.02 해당 글의 댓글이 몇 개인지 카운트하는 변수 추가
+	private int replycount;
 }

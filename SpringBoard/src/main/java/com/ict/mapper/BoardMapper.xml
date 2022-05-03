@@ -146,7 +146,17 @@
 			bno > 0		
 			]]>	
 		</select>
-	
+		
+		
+		<!-- ■ 05.02 댓글을 쓰면 해당 글의 replycount를 증가시켜주는 메서드 -->
+		<!-- 	     amount는 글 생성시 +1, 삭제시 -1을 받음 -->
+		<update id="updateReplyCount">
+			UPDATE board_tbl
+				SET
+			replycount = replycount + #{amount} 
+				WHERE 
+			bno = #{bno}
+		</update>
 	
 	
 	</mapper>

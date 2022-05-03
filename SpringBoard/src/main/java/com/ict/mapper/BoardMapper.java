@@ -61,5 +61,11 @@ public interface BoardMapper {
 	public int countPageNum(SearchCriteria cri);
 	
 	
+	// 05.02
+	// ■ 댓글을 쓰면 해당 글의 replycount를 증가시켜주는 메서드 (글번호와 증감량(+/-)을 받음)
+	public void updateReplyCount(@Param("bno") Long bno, @Param("amount") int amount);
+	
+	
+	
 	
 }

@@ -3,9 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	
 	<!-- 04.20 DB버전이 서로 다른 경우 -->
@@ -57,6 +61,26 @@
 	<context:component-scan base-package="com.ict.service"/>
 	<!-- com.ict.*을 하면 ict.블라블라 하는 애들 다 집어 넣어줌. 근데 그떄그때 넣는걸 선호한다고 하심 -->
 	
+	
+	<!-- ■ 05.02 프로젝트 세팅하면서 아래 4개 추가 (스프링교안 10의 14쪽) -->
+	<context:annotation-config></context:annotation-config> <!-- LogAdvice의 어노테이션 Component 쓰고 싶으면 1 -->
+	<context:component-scan base-package="com.ict.service"></context:component-scan>
+	<context:component-scan base-package="com.ict.aop"></context:component-scan> <!-- LogAdvice의 어노테이션 Component 쓰고 싶으면 2 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy> <!-- LogAdvice의 어노테이션 Aspect 쓰고 싶으면 -->
+	
+	
+	<!-- ■ 05.02 트랜젝션 실행을 위한 
+		     1) transactionManager 객체 생성 (DB주소인 dataSource도 넘겨주어야 함)
+		     2) annotation-driven 태그 (어노테이션을 거는 것만으로도 트랜잭션 작동하도록 도와줌)
+		     3) 쿼리문을 입력할 마이바티스 매퍼 스캔-->
+
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		  <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<tx:annotation-driven/>
+
 	
 
 	

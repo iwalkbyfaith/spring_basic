@@ -102,15 +102,21 @@ public class ReplyController {
 		
 		ResponseEntity<String> entity = null;
 		
+		log.info("댓글 삭제시 들어온 댓글 번호 -> " + rno);
+		
+		
 		try {
 			
 			service.removeReply(rno);
+			log.info("1 여기까지 완료");
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			
 		}catch(Exception e) {
-			
+			log.info("remove에서 뭔가 잘못됨");
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		
+		log.info("try catch 끝");
 		
 		return entity;
 	}

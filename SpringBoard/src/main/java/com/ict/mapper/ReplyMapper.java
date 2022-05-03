@@ -17,5 +17,8 @@ public interface ReplyMapper {
 
 	// ■ 댓글 삭제 (댓글 번호 받음)
 	public void delete(Long rno);
+	
+	// ■ 05.02 특정 댓글 번호의 글번호를 가져오기
+	public Long getBno(Long rno);
 
 }
