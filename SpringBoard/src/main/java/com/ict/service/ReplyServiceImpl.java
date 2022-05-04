@@ -33,10 +33,15 @@ public class ReplyServiceImpl implements IReplyService {
 		return mapper.getList(bno);
 	}
 	
-	// ■ 댓글 작성
+	// ■ 댓글 작성 (05.03 수정)
+	@Transactional													// ★ (중요) 두 개 이상의 DB 접근 구문이 사용되면 트랜잭션 적용 ★
 	@Override
 	public void addReply(ReplyVO vo) {
+		// 게시판 번호 받기
+		Long bno = vo.getBno();
 		mapper.create(vo);
+		// 해당 게시판 글 번호의 댓글 수 +1
+		boardMapper.updateReplyCount(bno, 1);
 	}
 
 	// ■ 댓글 수정
@@ -46,7 +51,7 @@ public class ReplyServiceImpl implements IReplyService {
 		
 	}
 	
-	// ■ 댓글 삭제
+	// ■ 댓글 삭제 (05.03 수정)
 	@Transactional
 	@Override
 	public void removeReply(Long rno) {
@@ -57,8 +62,13 @@ public class ReplyServiceImpl implements IReplyService {
 		// ■ 05.02 추가
 		// 해당 댓글의 글 번호 가져오기
 		// 그 글 번호의 Replycount를 -1 하기
+		// (중요) DB에서 커밋 안하면 pending 상태로 계속 지연되니 주의
 		boardMapper.updateReplyCount(bno, -1);
 	}
+
+
+
+
 	
 	
 	

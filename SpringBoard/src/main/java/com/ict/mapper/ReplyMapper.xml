@@ -33,10 +33,15 @@
 		DELETE FROM reply_tbl
 			WHERE rno = #{rno}
 	</delete>
+	
+	<!-- ■ 05.03 모든 댓글 삭제 (board_tbl의 bno가 필요) -->
+	<delete id="deleteAllRepl">
+		DELETE FROM reply_tbl WHERE bno = #{bno}	
+	</delete>
 
 
 	<!-- ■ 05.02 특정 댓글 번호의 글번호를 가져오기-->
-	<select id="getBno" resultType="long">			<!-- 내가 board_tbl -> reply_tbl -->
+	<select id="getBno" resultType="long">			
 		SELECT bno FROM reply_tbl
 			WHERE
 		rno = #{rno}

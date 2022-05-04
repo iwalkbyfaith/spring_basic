@@ -108,7 +108,7 @@ public class ReplyController {
 		try {
 			
 			service.removeReply(rno);
-			log.info("1 여기까지 완료");
+			log.info("댓글 삭제 try로 진입");
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			
 		}catch(Exception e) {
