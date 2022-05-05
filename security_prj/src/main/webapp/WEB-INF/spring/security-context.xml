@@ -6,7 +6,59 @@
 						http://www.springframework.org/schema/security/spring-security.xsd
 						http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans.xsd">
-						<!-- 스키마 로케이션 수정 사항 있음! ( 교안11의 6쪽 ) -->
+						<!-- ■ 05.03 스키마 로케이션 수정 사항 있음! ( 교안11의 6쪽 ) -->
+
+
+	<!-- ■ 05.04 Authentication Manager(인증 매니저) 추가, 내부 세팅 -->
+		<!--     교안(11) 9쪽 ~ -->
+		
+		<bean id="customAccessDenied" class="com.ict.security.CustomAccessDeniedHandler"/>
+			<!-- <security:http auto-config="true" use-expressions="true"> : 교안11의 28쪽에 의해 주석처리-->
+		<security:http>
+			
+			<!-- ● /secu/all 접속시 모든 유저에게 접근 허용 -->
+			<security:intercept-url pattern="/secu/all" access="permitAll"/>
+			
+			<!-- ● /secu/member는 Member에게만 접근 허용 + 나중에 admin을 추가하면서 admin도 가능 -->
+			<security:intercept-url pattern="/secu/member" access="hasRole('ROLE_MEMBER')"/>
+			
+			<!-- ● 접근 허용이 안됐다면 => 시큐리티에서 기본으로 제공하는 로그인 폼을 보여줌 -->
+			<security:form-login/>
+			
+			<!-- ● /secu/admin은 admin만 접근 허용 (교안11의 20쪽) -->
+			<security:intercept-url pattern="/secu/admin" access="hasRole('ROLE_ADMIN')"/>
+			
+				<!-- ● 에러페이지 커스터마이징하기 (교안11의 22쪽)
+					   : 접근 허용이 거부되면, 아까 떴던 403페이지 대신 CommonController에 만든 /accessError 주소로 강제 이동-->
+				<!-- <security:access-denied-handler error-page="/accessError"/> : 교안11의 28쪽에 의해 주석처리-->
+			
+			<!-- ● /accessError로 이동하는 것을 주석처리하고 커스텀 페이지로 이동하도록 -->
+			<!--   15번코드(이때까지는 연결 안됨) 이후 이 코드를 입력하면 의존성 주입이 됨. 빈즈그래프 확인 : 교안11의 30쪽 -->
+			<security:access-denied-handler ref="customAccessDenied"/>
+			
+		</security:http>
+		
+		
+		
+		
+	<!-- ■ 05.04 인증을 도와주는 수단을 작성할 수 있음. 
+		   지금은 태그로 추가하지만, 나중에는 DB에 저장해서 사용할 것 !!! -->
+		   
+		<security:authentication-manager>
+		
+			<!-- ● DB를 쓰지 않아도 계정 세팅이 가능함 (test 용) 
+				   운영자 아이디는 여기다가 넣어도 되긴 한다고 하심. 하지만 DB를 쓰는 것을 추천	-->
+			<security:authentication-provider>
+				<security:user-service>
+					<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+					<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN"/>
+				</security:user-service>
+			</security:authentication-provider>
+			
+		</security:authentication-manager>
+		
+		
+
 
 
 </beans>

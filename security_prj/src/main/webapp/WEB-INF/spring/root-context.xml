@@ -5,7 +5,9 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.0.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
@@ -48,9 +50,6 @@
 	</bean>
 	
 	
-	<!-- 22.04.04 Xml파일로 인터페이스 구현하기 -->
-	<!-- 22.04.05 패키지명을 아래와 같이 바꿨음 : <mybatis-spring:scan base-package="com.ict.mapper"/>  -->
-	<mybatis-spring:scan base-package="com.ict.time.mapper"/>
 	
 	<!-- 22.04.05 -->
 	<!-- com.ict.mapper 패키지를 새로 생성후 BoardMapper 인터페이스와 xml 파일을 생성만 해주세요 -->
