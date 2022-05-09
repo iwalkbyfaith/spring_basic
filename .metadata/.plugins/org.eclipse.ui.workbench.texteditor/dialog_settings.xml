@@ -8,28 +8,28 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="model"/>
+			<item value="security:form"/>
+			<item value="hide"/>
+			<item value="ROLE_MEMBER"/>
+			<item value="junit"/>
+			<item value="show"/>
+			<item value="spring-jdbc"/>
+			<item value="jdbc"/>
+			<item value="오라클"/>
+			<item value="lombok"/>
+			<item value="log4"/>
+			<item value="log4j"/>
 			<item value="boat"/>
 			<item value="tx"/>
-			<item value="jdbc"/>
 			<item value="spring-test"/>
-			<item value="configuration"/>
-			<item value="3.5.1"/>
-			<item value="version&gt;3.5.1"/>
-			<item value="version&gt;3."/>
-			<item value="version"/>
-			<item value="junit"/>
-			<item value="javax.ser"/>
-			<item value="javax."/>
-			<item value="data-rno"/>
-			<item value="replyLi"/>
-			<item value="batis"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1640"/>
-		<item key="DIALOG_Y_ORIGIN" value="445"/>
+		<item key="DIALOG_X_ORIGIN" value="1022"/>
+		<item key="DIALOG_Y_ORIGIN" value="372"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
