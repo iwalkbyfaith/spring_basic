@@ -21,6 +21,8 @@
 		<!-- ■ 05.09 비밀번호 암호화?복호화?를 위해 BcryptPasswordEncoder 사용 (교안11의 50)  -->
 		<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 		
+		<!-- ■ 05.10 MemberMapper의 데이터를 스프링 시큐리티에서 처리할 수 있도록 커스터마이징(교안11의 63) -->
+		<bean id="customUserDetailsService" class="com.ict.security.CustomUserDetailsService"/>
 		
 		
 		
@@ -65,7 +67,8 @@
 		
 			<!-- ● DB를 쓰지 않아도 계정 세팅이 가능함 (test 용) 
 				   운영자 아이디는 여기다가 넣어도 되긴 한다고 하심. 하지만 DB를 쓰는 것을 추천	-->
-			<security:authentication-provider>
+				   <!-- ■ 05.10 CustomUserDetailsService를 사용해 로그인하도록 바꾸기-->
+			<security:authentication-provider user-service-ref="customUserDetailsService">
 				<!-- ■ 05.09 인증 매니저를 이제 작성한 DB로 쓰도록 변경(교안11의 48) 
 					<security:user-service>
 						<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
@@ -73,7 +76,10 @@
 					</security:user-service>-->
 				
 				<!-- ■ 05.09 root-context.xml에 dataSource라는 이름으로 히카리 설정한 DB연동 코드와 연결 -->
-				<security:jdbc-user-service data-source-ref="dataSource"/>
+				<!-- <security:jdbc-user-service data-source-ref="dataSource"/> (05.10 교안11의 64에 의해 주석처리)-->
+				
+				
+				
 				
 				<!-- ■ 05.09 비밀번호 암호화를 위해 BcryptPasswordEncoder 사용 (교안11의 50)-->
 				<security:password-encoder ref="bcryptPasswordEncoder"/>
