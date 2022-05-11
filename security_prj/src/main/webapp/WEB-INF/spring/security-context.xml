@@ -28,20 +28,28 @@
 		
 		<security:http>
 			
-			<!-- ● /secu/all 접속시 모든 유저에게 접근 허용 -->
-			<security:intercept-url pattern="/secu/all" access="permitAll"/>
+			<!-- ● /secu/all 접속시 모든 유저에게 접근 허용 --> 
+				<security:intercept-url pattern="/secu/all" access="permitAll"/>
+				
+			<!--  ■ 05.11 스프링 인터셉터 어노테이션으로 처리를 위한 주석처리(교안12의 22) 
+			              당장은 페이지가 3개밖에 없기 때문에 부담이 없지만, 수십개 생기면 어노테이션으로 관리해야함 
+			              (권한의 제약을 없앤 것 -> 어노테이션을 걸기 전까지는 admin 빼고(principal땜시) 접속이 잘 됨)
 			
-			<!-- ● /secu/member는 Member에게만 접근 허용 + 나중에 admin을 추가하면서 admin도 가능 -->
-			<security:intercept-url pattern="/secu/member" access="hasRole('ROLE_MEMBER')"/>
-			
+					 ● /secu/member는 Member에게만 접근 허용 + 나중에 admin을 추가하면서 admin도 가능 
+					<security:intercept-url pattern="/secu/member" access="hasRole('ROLE_MEMBER')"/>
+					
+					 ● /secu/admin은 admin만 접근 허용 (교안11의 20쪽) 
+					<security:intercept-url pattern="/secu/admin" access="hasRole('ROLE_ADMIN')"/>
+			 -->
+			 
+			 
 			<!-- ● 접근 허용이 안됐다면 => 시큐리티에서 기본으로 제공하는 로그인 폼을 보여줌 -->
-			<!-- 05.06 커스텀 로그인 페이지를 만들기 위해 아래 코드로 수정 (교안11의 30쪽, 39쪽)--> 
-			<!-- <security:form-login/>-->
-			<security:form-login login-page="/customLogin"
-				authentication-success-handler-ref="customLoginSuccess"/>
+				<!-- 05.06 커스텀 로그인 페이지를 만들기 위해 아래 코드로 수정 (교안11의 30쪽, 39쪽)--> 
+				<!-- <security:form-login/>-->
+				<security:form-login login-page="/customLogin"
+					authentication-success-handler-ref="customLoginSuccess"/>
 			
-			<!-- ● /secu/admin은 admin만 접근 허용 (교안11의 20쪽) -->
-			<security:intercept-url pattern="/secu/admin" access="hasRole('ROLE_ADMIN')"/>
+			
 			
 				<!-- ● 에러페이지 커스터마이징하기 (교안11의 22쪽)
 					   : 접근 허용이 거부되면, 아까 떴던 403페이지 대신 CommonController에 만든 /accessError 주소로 강제 이동-->
@@ -52,8 +60,15 @@
 			<security:access-denied-handler ref="customAccessDenied"/>
 			
 			<!-- ● 05.09 로그아웃 (자동으로 post 방식으로 접근했을때 되도록 함.)-->
-			<security:logout logout-url="/customLogout" invalidate-session="true"/>
+			<!-- ● 05.11 로그아웃시 remeber-me, JSESSIONID 쿠키를 파기하는 코드 추가(아래 줄) -->
+			<security:logout logout-url="/customLogout" invalidate-session="true"
+							 delete-cookies="remember-me, JSESSIONID"/>
+				<!-- 원래는 서버를 껐다 키면 세션이 삭제된다. 하지만 리멤버미가 있으면 자동로그인 기능 그대로 유지. 그래서 로그아웃할 때 쿠키를 파기하는 것 -->
 			
+			
+			<!-- ● 05.11 자동 로그인 -->
+			<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+							 <!-- ㄴ dataSource에 세팅된 DB를 사용할 것이라는 뜻 --> <!-- ㄴ 60(초) x 60 x 24 x 7 : 일주일 -->
 			
 		</security:http>
 		
