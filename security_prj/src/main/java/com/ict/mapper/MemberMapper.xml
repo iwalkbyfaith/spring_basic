@@ -36,6 +36,37 @@
 		WHERE
 			m.userid = #{userid}
 	</select>
+	
+	
+	
+	<!-- ■ 회원가입 로직 - 회원 정보 기입-->
+	<insert id="insertMemberTbl">
+		INSERT INTO MEMBER_TBL(userid, userpw, username)
+			VALUES
+		(#{userId}, #{userPw}, #{userName})
+	</insert>
+	
+	
+	<!-- ■ 회원가입 로직 - 권한 목록 기입-->
+		<!-- collection : List<VO>의 변수명 / item : 변수명 / separator : 각 사이클과 사이클 사이에 넣을 문자(한칸 띄워줘야 에러 안남. 콤마를 넣는 경우도) -->
+	<update id="insertMemberAuth">
+		INSERT ALL
+			<foreach collection="authList" item="item" separator=" ">
+				INTO MEMBER_AUTH(userid, auth)
+					VALUES
+				(#{item.userId}, #{item.auth})
+			</foreach>
+		SELECT *
+			FROM DUAL
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </mapper>

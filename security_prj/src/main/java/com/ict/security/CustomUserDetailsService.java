@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j	 
 public class CustomUserDetailsService implements UserDetailsService {
 
-	@Autowired
+	@Autowired // 서비스니까 매퍼 호출
 	private MemberMapper mapper;
 	
 	@Override

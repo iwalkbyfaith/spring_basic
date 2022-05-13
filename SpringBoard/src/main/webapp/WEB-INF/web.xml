@@ -4,9 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-	<context-param>
+	<context-param> <!-- ■ 05.12 security-context.xml 추가 --> <!-- 빈 컨테이너에 있는 시큐리티 관련 로직을 web.xml에서 인식하도록 하는 설정 -->
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml
+					 /WEB-INF/spring/security-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -31,21 +33,33 @@
 	</servlet-mapping>
 	
 	
-	<!-- 04.05 한글 인코딩 설정 -->
-	<filter>
-		<filter-name>encoding</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
+	<!-- ■ 04.05 한글 인코딩 설정 -->
+	<filter> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	    <init-param> 
+	       <param-name>encoding</param-name> 
+	       <param-value>UTF-8</param-value> 
+	    </init-param> 
+	    <init-param> 
+	       <param-name>forceEncoding</param-name> 
+	       <param-value>true</param-value> 
+	    </init-param> 
+	 </filter> 
+	 <filter-mapping> 
+	    <filter-name>encodingFilter</filter-name> 
+	    <url-pattern>/*</url-pattern> 
+	 </filter-mapping> 
 	
+	
+	<!-- ■ 05.12 필터 설정 (교안11-7쪽) -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>	
 	<filter-mapping>
-		<filter-name>encoding</filter-name>
-		<servlet-name>appServlet</servlet-name>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern> <!-- /* : 이 사이트에 모든 주소에 대해서 스프링 시큐리티를 적용하겠다는 의미 -->
 	</filter-mapping>
 
 </web-app>

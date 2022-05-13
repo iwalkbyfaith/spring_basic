@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security.xsd
+						http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+						<!-- ■ 05.03 스키마 로케이션 수정 사항 있음! ( 교안11의 6쪽 ) -->
+
+
+	<!-- ■ 05.04 Authentication Manager(인증 매니저) 추가, 내부 세팅 -->
+		<!--     교안(11) 9쪽 ~ -->
+		
+		<bean id="customAccessDenied" class="com.ict.security.CustomAccessDeniedHandler"/>
+			<!-- <security:http auto-config="true" use-expressions="true"> : 교안11의 28쪽에 의해 주석처리-->
+			
+		<!-- 05.06 추가(교안11의 39) -->
+		<bean id="customLoginSuccess" class="com.ict.security.CustomLoginSuccessHandler"/>
+		
+		<!-- ■ 05.09 비밀번호 암호화?복호화?를 위해 BcryptPasswordEncoder 사용 (교안11의 50)  -->
+		<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+		
+		<!-- ■ 05.10 MemberMapper의 데이터를 스프링 시큐리티에서 처리할 수 있도록 커스터마이징(교안11의 63) -->
+		<bean id="customUserDetailsService" class="com.ict.security.CustomUserDetailsService"/>
+		
+		
+		
+		<security:http>
+			 
+			 
+			<!-- ● 접근 허용이 안됐다면 => 커스텀 로그인 로직-->
+				<security:form-login login-page="/customLogin"
+					authentication-success-handler-ref="customLoginSuccess"/>
+			
+			<!-- ● /accessError로 이동하는 것을 주석처리하고 커스텀 페이지로 이동하도록 -->
+			<!--   15번코드(이때까지는 연결 안됨) 이후 이 코드를 입력하면 의존성 주입이 됨. 빈즈그래프 확인 : 교안11의 30쪽 -->
+			<security:access-denied-handler ref="customAccessDenied"/>
+			
+			<!-- ● 05.09 로그아웃 (자동으로 post 방식으로 접근했을때 되도록 함.)-->
+			<!-- ● 05.11 로그아웃시 remeber-me, JSESSIONID 쿠키를 파기하는 코드 추가(아래 줄) -->
+			<security:logout logout-url="/customLogout" invalidate-session="true"
+							 delete-cookies="remember-me, JSESSIONID"/>
+				<!-- 원래는 서버를 껐다 키면 세션이 삭제된다. 하지만 리멤버미가 있으면 자동로그인 기능 그대로 유지. 그래서 로그아웃할 때 쿠키를 파기하는 것 -->
+						
+			<!-- ● 05.11 자동 로그인 -->
+			<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+							 <!-- ㄴ dataSource에 세팅된 DB를 사용할 것이라는 뜻 --> <!-- ㄴ 60(초) x 60 x 24 x 7 : 일주일 -->
+			
+		</security:http>
+		
+		
+		
+		
+	<!-- ■ 05.04 인증을 도와주는 수단을 작성할 수 있음. 
+		   지금은 태그로 추가하지만, 나중에는 DB에 저장해서 사용할 것 !!! -->
+		   
+		<security:authentication-manager>
+		
+			<!-- ● DB를 쓰지 않아도 계정 세팅이 가능함 (test 용) 
+				   운영자 아이디는 여기다가 넣어도 되긴 한다고 하심. 하지만 DB를 쓰는 것을 추천	-->
+				   <!-- ■ 05.12 CustomUserDetailsService를 사용해 로그인하도록 바꾸기
+				   				암호화 모듈을 넣기 윟 멎너 선언해야하는 태그-->
+			<security:authentication-provider user-service-ref="customUserDetailsService">
+				
+				<!-- ■ 05.09 비밀번호 암호화를 위해 BcryptPasswordEncoder 사용 (교안11의 50)-->
+					<security:password-encoder ref="bcryptPasswordEncoder"/>
+				
+			</security:authentication-provider>
+			
+		</security:authentication-manager>
+		
+		
+
+
+
+</beans>

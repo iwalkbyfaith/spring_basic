@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="AuthVO"/>
+		<item key="selection" value="롬복"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="롬복"/>
+			<item value="javax.servlet"/>
+			<item value="&lt;java-version"/>
+			<item value="remeber"/>
+			<item value="&lt;servlet-name&gt;"/>
+			<item value="aspect"/>
+			<item value="aspectj"/>
 			<item value="AuthVO"/>
 			<item value="model"/>
 			<item value="security:form"/>
@@ -16,13 +23,6 @@
 			<item value="junit"/>
 			<item value="show"/>
 			<item value="spring-jdbc"/>
-			<item value="jdbc"/>
-			<item value="오라클"/>
-			<item value="lombok"/>
-			<item value="log4"/>
-			<item value="log4j"/>
-			<item value="boat"/>
-			<item value="tx"/>
 		</list>
 		<list key="replacehistory">
 		</list>

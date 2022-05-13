@@ -238,6 +238,24 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		    <version>5.0.7.RELEASE</version>
 		</dependency>
+		
+		<!-- ■ 22.05.12 aspectjweaver -->
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.0</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- ■ 22.05.12 aspectjrt -->
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.9.0</version>
+		    <!-- <scope>runtime</scope> --> <!-- @Aspect가 import 안돼서 주석처리 -->
+		</dependency>
 
 
 
