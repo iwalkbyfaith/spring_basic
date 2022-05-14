@@ -3836,3 +3836,13 @@
 5월 13, 2022 11:24:31.186 [19356:12884:0513/112431.185:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
 5월 13, 2022 11:55:40.631 [19356:16844:0513/115540.631:ERROR:device_event_log_impl.cc(214)] [11:55:40.630] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
 5월 13, 2022 11:55:42.251 [19356:17196:0513/115542.248:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 12:02:30.536 [19356:17196:0513/120230.536:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 12:06:31.520 [19356:17196:0513/120631.520:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 12:30:12.613 [19356:17196:0513/123012.610:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 13:25:02.264 [19356:17196:0513/132502.263:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 13:25:02.265 [19356:16672:0513/132502.264:ERROR:get_updates_processor.cc(260)] PostClientToServerMessage() failed during GetUpdates with error 2
+5월 13, 2022 13:44:58.486 [19356:17196:0513/134458.486:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 13, 2022 13:46:11.512 [19356:16844:0513/134611.511:ERROR:device_event_log_impl.cc(214)] [13:46:11.511] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+5월 13, 2022 13:46:11.520 [19356:16844:0513/134611.519:ERROR:device_event_log_impl.cc(214)] [13:46:11.519] USB: usb_service_win.cc:307 SetupDiEnumDeviceInterfaces: 사용 가능한 데이터가 없습니다. (0x103)
+5월 13, 2022 16:01:01.86 [19356:16844:0513/160101.084:ERROR:device_event_log_impl.cc(214)] [16:01:01.084] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+5월 13, 2022 16:24:20.700 [19356:20968:0513/162420.699:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater

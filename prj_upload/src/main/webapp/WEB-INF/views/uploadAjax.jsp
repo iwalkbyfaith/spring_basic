@@ -26,13 +26,26 @@
 			
 			// 1. 파일 확장자를 거르기 위한 정규 표현식 & 파일 크기 제한(~21)
 			
-				let regex = 
+				let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+				let maxSize = 5242880; //5MB
+				
+				function checkExtension(fileName, fileSize){
+					if(fileSize >= maxSize){
+						alert("파일 사이즈 초과");
+						return false;
+					}
+					if(regex.test(fileName)){
+						alert("해당 종류의 파일은 업로드할 수 없습니다");
+						return false;
+					}
+					return true;
+				}
 			
 			
 			
 			
 			
-			// 2.
+			// 2. ajax로 파일 업로드하기
 			$("#uploadBtn").on("click", function(e){	// e : 현재 돌리고 있는 이벤트의 정보, 클릭한 대상의 정보 (안 넣어도 되긴 함)
 														//     onclick은 클릭한 대상의 정보지만, 다른 것을 쓰면 '클릭한 대상의 정보'가 아닌 경우도 있다(참고)	
 				
@@ -46,6 +59,12 @@
 				
 				// 파일 데이터를 폼에 집어 넣기
 				for(var i = 0; i < files.length; i++){
+					
+					// 위의 1.에서 추가된 checkExtension을 사용하여 이름과 사이즈 검증하기
+					if(!checkExtension(files[i].name, files[i].size)){
+						return false;
+					}
+					// 검증이 된 파일은 넣어준다.
 					formData.append("uploadFile", files[i]);		// 폼 데이터 내부에 집어 넣어라
 				}
 				console.log("form 종료 후 formData");
@@ -63,6 +82,7 @@
 				}); // ajax 끝
 				
 				console.log("ajax 종료");
+				
 			});	
 		});
 	</script>
