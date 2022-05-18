@@ -13,6 +13,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- ■ 05.17 코드 설명) 우리가 쓰고 싶은 폰트, 스타일, 부트 스트랩 테마, 이미지.. 관련애들은 /resources에 들어있다는 뜻 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

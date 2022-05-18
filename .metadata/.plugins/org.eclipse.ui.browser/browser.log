@@ -3852,3 +3852,18 @@
 5월 16, 2022 09:23:49.29 [8644:12772:0516/092349.026:ERROR:device_event_log_impl.cc(214)] [09:23:49.027] USB: usb_device_handle_win.cc:1049 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
 5월 16, 2022 09:24:46.901 [8644:3748:0516/092446.900:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
 5월 16, 2022 11:40:49.593 [8644:12772:0516/114049.593:ERROR:device_event_log_impl.cc(214)] [11:40:49.592] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+
+5월 17, 2022 09:11:48.221 NEW SESSION
+5월 17, 2022 09:11:48.221 [1612:3900:0517/091148.217:ERROR:device_event_log_impl.cc(214)] [09:11:48.217] USB: usb_device_handle_win.cc:1049 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+5월 17, 2022 09:11:48.223 [1612:3900:0517/091148.219:ERROR:device_event_log_impl.cc(214)] [09:11:48.219] USB: usb_device_handle_win.cc:1049 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+5월 17, 2022 09:12:46.124 [1612:8768:0517/091246.123:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
+5월 17, 2022 09:53:05.442 [1612:17900:0517/095305.441:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -118
+5월 17, 2022 09:53:34.457 [1612:17900:0517/095334.456:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 17, 2022 09:54:00.51 [1612:17900:0517/095400.050:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -105
+5월 17, 2022 12:29:05.284 [1612:3900:0517/122905.283:ERROR:device_event_log_impl.cc(214)] [12:29:05.281] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+5월 17, 2022 12:29:05.294 [1612:3900:0517/122905.293:ERROR:device_event_log_impl.cc(214)] [12:29:05.293] USB: usb_service_win.cc:307 SetupDiEnumDeviceInterfaces: 사용 가능한 데이터가 없습니다. (0x103)
+5월 17, 2022 12:55:32.37 [1612:3900:0517/125532.036:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 17, 2022 12:55:32.37 [1612:3900:0517/125532.036:ERROR:interface_endpoint_client.cc(665)] Message 1 rejected by interface blink.mojom.WidgetHost
+5월 17, 2022 13:01:47.551 [1612:3900:0517/130147.550:ERROR:device_event_log_impl.cc(214)] [13:01:47.550] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+5월 17, 2022 14:12:46.24 [1612:15812:0517/141246.022:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
+5월 17, 2022 15:44:02.80 [1612:17900:0517/154402.079:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -105
