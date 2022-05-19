@@ -1,6 +1,7 @@
 package com.ict.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -20,4 +21,8 @@ public class BoardVO {
 
 	// 05.02 해당 글의 댓글이 몇 개인지 카운트하는 변수 추가
 	private int replycount;
+	
+	// 05.19 BoardVO에 첨부파일이 있는지 확인하는 변수 추가
+		// 첨부파일을 여러개 할 수 있으므로 List로 받는다.
+	private List<BoardAttachVO> attachList;
 }

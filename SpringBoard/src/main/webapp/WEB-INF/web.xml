@@ -25,6 +25,18 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<!-- ■ 05.19 파일 업로드 -->
+		<multipart-config>
+			<location>C:\\upload_data\\temp</location>
+			<max-file-size>20971520</max-file-size>
+			<max-request-size>41943040</max-request-size>
+			<file-size-threshold>20971520</file-size-threshold>
+		</multipart-config>
+		
+		
+		
+		
 	</servlet>
 		
 	<servlet-mapping>
@@ -61,5 +73,6 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern> <!-- /* : 이 사이트에 모든 주소에 대해서 스프링 시큐리티를 적용하겠다는 의미 -->
 	</filter-mapping>
+	
 
 </web-app>

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="getJSON"/>
+		<item key="selection" value="이벤트 위임"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="getJSON"/>
+			<item value="이벤트 위임"/>
+			<item value="class=&apos;reply&apos;"/>
+			<item value="이벤트"/>
+			<item value="uploadResult"/>
+			<item value="!obj"/>
+			<item value="replace"/>
+			<item value="ajax"/>
+			<item value="/upload"/>
+			<item value="befor"/>
+			<item value="fileType"/>
+			<item value=".image"/>
+			<item value="/uploadAjax"/>
+			<item value="cdn`"/>
+			<item value="cdn"/>
 			<item value="put"/>
-			<item value="$.ajax"/>
-			<item value="uploadResult ="/>
-			<item value="console.log(result)"/>
-			<item value="uploadDiv"/>
-			<item value="/uploadAjaxAction"/>
-			<item value="&lt;maven-compiler"/>
-			<item value="jackson"/>
-			<item value="persistence"/>
-			<item value="junit"/>
-			<item value="log4j"/>
-			<item value="javax"/>
-			<item value="javax-ser"/>
-			<item value="javax.serv"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1022"/>
-		<item key="DIALOG_Y_ORIGIN" value="372"/>
+		<item key="DIALOG_X_ORIGIN" value="1386"/>
+		<item key="DIALOG_Y_ORIGIN" value="325"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
