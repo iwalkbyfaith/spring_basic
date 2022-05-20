@@ -97,12 +97,26 @@
 		
 		
 		<!-- ■ INSERT : row 1개 적재하기 -->
-			<!-- insert 구문이므로 insert 태그를 써야하고, 리턴 자료가 없으니 resultType도 작성 안합니다.
-				 BoardVO를 입력 받지만 #{} 내부에는 vo.변수명이 아닌, 해당 VO의 멤버변수 이름을 써줍니다.	-->
+			<!-- ● insert 구문이므로 insert 태그를 써야하고, 리턴 자료가 없으니 resultType도 작성 안합니다.
+				   BoardVO를 입력 받지만 #{} 내부에는 vo.변수명이 아닌, 해당 VO의 멤버변수 이름을 써줍니다.	-->
+				 
+			<!-- ● 05.20 첨부파일을 추가하기위해 내부로직 수정
+				   bno는 board_num.nextval이 실행되기 전까지 몇 번인지 알 수 없으므로,
+				   미리 vo에 bno를 추가하기 위해서는 아래 insert 구문 실행 이전에 먼저 글 번호가 몇 번일지 조회하는 쿼리문이 실행되어야 함
+				   
+				   1) selectKey로 board_num.nextval로 들어갈 bno값을 먼저 얻어내서 
+				   2) 그것을 집어넣은 insert구문을 실행 (코드가 board_num.nextval -> #{bno}로 수정됨)
+			-->
+			 
 		<insert id="insert">
+			
+			 <selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			 	SELECT board_num.nextval from dual
+			 </selectKey>		
+		
 			INSERT INTO board_tbl (bno, title, content, writer)
 				VALUES 
-			(board_num.nextval, #{title}, #{content}, #{writer})
+			(#{bno}, #{title}, #{content}, #{writer})
 		</insert>
 		
 		

@@ -297,8 +297,8 @@
 				
 			
 			
-			
-				// ■ 05.19 제출 버튼 누를 경우, 첨부파일 정보를 폼에 추가해서 전달하는 코드
+				
+				// ■ 05.19 폼의 제출 버튼 누를 경우, 첨부파일 정보를 폼에 추가해서 전달하는 코드
 				$("#submitBtn").on("click", function(e){
 					
 					// 1. 제출 버튼을 눌렀을 대 바로 작동하지 않도록 기능 막기
@@ -306,13 +306,44 @@
 					
 					// 2. var formObj = $("form");로 위쪽에 있던 폼 태그를 가져온다.
 					let formObj = $("form");
+					console.log("formObj" + formObj);
 					
-					// 3. 05.19 수업에서는 첨부파일 내에 들어있던 이미지 정보를 콘솔에 찍기만하고 종료하고 내일 수업에 DB에 넣는 부분까지 진행합니다.
+					// 3. 05.20 str 변수 추가
+					let str ="";
+					
+					// 4. 05.19 수업에서는 첨부파일 내에 들어있던 이미지 정보를 콘솔에 찍기만하고 종료하고 내일 수업에 DB에 넣는 부분까지 진행합니다.
 					$(".uploadResult ul li").each(function(i, obj){	// li 태그를 each로 받음
+						// i   : 인덱스
+						// obj : 순번에 있는 클릭한 li 요소
 						
-						// 3.1 제출버튼('작성완료')을 눌렀을때, 첨부파일에 대해 인식을 하는지 보기 위해 콘솔에 찍음
+						// 4.1 제출버튼('작성완료')을 눌렀을때, 첨부파일에 대해 인식을 하는지 보기 위해 콘솔에 찍음
 						console.log($(obj));
-					});
+					
+						// 4.2 05.20(교안13의 66 진행)
+						let jobj = $(obj);
+						
+						console.log("jobj ▼ ");
+						console.log(jobj);
+						
+						
+						str += "<input type='hidden' name='attachList[" + i + "].fileName'" +
+							   	 	 			   " value='" + jobj.data("filename") + "'>" +
+							   "<input type='hidden' name='attachList[" + i + "].uuid'" +
+							   		 			   " value='" + jobj.data("uuid") + "'>" +
+							   "<input type='hidden' name='attachList[" + i + "].uploadPath'" +
+							   		 			   " value='" + jobj.data("path") + "'>" +
+							   "<input type='hidden' name='attachList[" + i + "].fileType'" +
+							   		 			   " value='" + jobj.data("type") + "'>";
+						
+					});// end .each
+					
+					// 5. 05.20 str을 formObj에 추가해준다.
+						// 5.1 잘 들어갔는지 확인만하기(개발자도구의 요소에서 폼에 삽입되었는지 확인 가능)
+						//formObj.append(str);
+					
+						// 5.2 들어갔다면 .submit()을 넣어서 전송한다.
+							// 전송 후, boardInsert의 페이로드를 확인해서 잘 들어갔는 확인한다.
+						formObj.append(str).submit();
 				
 				});// end click #submitBtn
 			

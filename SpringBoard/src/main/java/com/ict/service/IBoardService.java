@@ -2,7 +2,7 @@ package com.ict.service;
 
 import java.util.List;
 
-
+import com.ict.domain.BoardAttachVO;
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
 import com.ict.domain.SearchCriteria;
@@ -38,5 +38,8 @@ public interface IBoardService {
 	
 	// ■ 게시판 수정하기
 	public void updateBoard2(BoardVO vo);
+	
+	// ■ 05.20 DB에서 게시물에 연동된 첨부파일 목록 가져오기 
+	public List<BoardAttachVO> getAttachList(long bno);
 
 }

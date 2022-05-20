@@ -3883,3 +3883,24 @@
 5월 19, 2022 14:26:02.922 [10176:9332:0519/142602.921:ERROR:CONSOLE(1)] "Uncaught RangeError: Trying to update state with a transaction that doesn't start from the previous state.", source: devtools://devtools/bundled/devtools-frontend/front_end/third_party/codemirror.next/chunk/codemirror.js (1)
 5월 19, 2022 14:42:45.533 [10176:22756:0519/144245.533:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
 5월 19, 2022 15:01:41.458 [10176:9332:0519/150141.457:ERROR:device_event_log_impl.cc(214)] [15:01:41.456] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+
+5월 20, 2022 09:06:26.173 NEW SESSION
+5월 20, 2022 09:06:26.174 [6384:11868:0520/090626.163:ERROR:device_event_log_impl.cc(214)] [09:06:26.163] USB: usb_device_handle_win.cc:1049 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+5월 20, 2022 09:06:26.176 [6384:11868:0520/090626.165:ERROR:device_event_log_impl.cc(214)] [09:06:26.165] USB: usb_device_handle_win.cc:1049 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+5월 20, 2022 09:07:24.85 [6384:12840:0520/090724.085:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
+5월 20, 2022 09:54:28.674 [6384:5420:0520/095428.673:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 12:32:43.705 [6384:11868:0520/123243.704:ERROR:device_event_log_impl.cc(214)] [12:32:43.704] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 요소가 없습니다. (0x490)
+5월 20, 2022 13:28:48.467 [6384:5420:0520/132848.467:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 13:28:48.468 [6384:3704:0520/132848.468:ERROR:get_updates_processor.cc(260)] PostClientToServerMessage() failed during GetUpdates with error 2
+5월 20, 2022 13:54:18.655 [6384:5420:0520/135418.655:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 14:16:01.444 [6384:13888:0520/141601.444:ERROR:util.cc(126)] Can't create base directory: C:\Program Files\Google\GoogleUpdater
+5월 20, 2022 14:16:03.33 [6384:5420:0520/141603.032:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 14:39:37.481 [6384:5420:0520/143937.480:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 14:54:10.631 [6384:5420:0520/145410.631:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 15:53:56.329 [6384:5420:0520/155356.329:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 15:59:06.205 [6384:5420:0520/155906.204:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 15:59:29.801 [6384:5420:0520/155929.800:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 16:00:15.478 [6384:5420:0520/160015.477:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 16:02:01.799 [6384:5420:0520/160201.798:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 16:04:43.669 [6384:5420:0520/160443.668:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106
+5월 20, 2022 16:27:34.640 [6384:5420:0520/162734.639:ERROR:connection_factory_impl.cc(425)] Failed to connect to MCS endpoint with error -106

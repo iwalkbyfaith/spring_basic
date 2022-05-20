@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ict.domain.BoardAttachVO;
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
 import com.ict.domain.PageMaker;
@@ -200,7 +205,16 @@ public class BoardController {
 		// 디버깅
 		log.info("들어온 BoardVO 데이터 체크 -> " + vo);
 		
-		// DB에 적재
+		// 05.20 디버깅 (게시판 글쓰기에서 hidden으로 보낸 첨부파일들 들어왔는지 확인하기)
+			log.info("▼ 글쓰기를 완료한 후, /boardInsert(post)에서 받은 첨부파일 정보");
+			
+			// 디버깅 : 첨부파일 데이터가 있다면?
+			if(vo.getAttachList() != null) {
+				// attachList(List자료)를 하나하나 번갈아가면서 attach라는 변수로 집어 넣고 오른쪽에 있는 코드(로그찍기)를 실행해라.
+				vo.getAttachList().forEach(attach -> log.info(attach));
+			}
+		
+		// DB에 적재 (첨부파일 데이터도 적재하는 버전으로 xml 코드 수정)
 		service.insert(vo);
 		
 		return "redirect:/board/boardList";
@@ -279,6 +293,16 @@ public class BoardController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		return "redirect:/board/boardDetail/" + vo.getBno();
+	}
+	
+	
+	// ■ DB에 있는 첨부파일(이미지 정보)를 rest 통신으로 출력할 수 있는 코드
+	@GetMapping(value="/getAttachList", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@ResponseBody
+	public ResponseEntity<List<BoardAttachVO>> getAttachList(long bno){
+		
+		log.info("/getAttachList) 들어온 bno -> " + bno);
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 	}
 	
 	

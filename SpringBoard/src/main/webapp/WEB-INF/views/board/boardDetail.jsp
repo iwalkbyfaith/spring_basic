@@ -27,6 +27,30 @@
 		}
 		
 		#reply{ width: 450px;}
+		
+		/* ● 05.20 첨부파일 */
+		.uploadResult{
+			width:100%;
+			background-color: gray;
+		}
+		.uploadResult ul{
+			display:flex;
+			flex-flow:row;
+			justify-content:center;
+			align-items:center;
+		}
+		.uploadResult ul li{
+			list-style:none;
+			padding:10px;
+			align-content:center;
+			text-align:center;
+		}
+		.uploadResult ul li img{
+			width:100px;
+		}
+		
+		
+		
 	</style>
 	
 
@@ -59,6 +83,14 @@
 			<textarea cols=110 rows=20 class="form-control" readonly >${board.content}</textarea> <br/><br/>
 		
 		</div><br/>	
+		
+		<!-- ■ 05.20 글 조회하는 페이지의 하단에 첨부파일 영역 추가 -->
+			<div class="row">
+				<h3 class="text-primary">첨부파일 영역</h3>
+				<div id="uploadResult">
+					<ul><!-- 첨부 파일이 들어갈 영역 --></ul>
+				</div>
+			</div>
 		
 		<!-- <a href="http://localhost:8181/boardList"><button>게시글 리스트</button></a> <br/><br/>  -->
 	
@@ -371,7 +403,80 @@
 				}
 				
 			});
-		});
+		}); // end click #replyModBtn
+		
+		
+		
+		// ■ 05.20 익명함수를 사용해 getJSON으로 첨부파일 가져오게 하기(교안13의 72, 75)
+		(function(){
+			
+			$.getJSON("/board/getAttachList", {bno : bno}, function(arr){ // 오른쪽 bno는 스크립트 태그 바로 밑에 선언한 그거임
+				console.log("▼ 첨부된 파일 목록(있다면)")
+				console.log(arr);
+				console.log("▲ 첨부된 파일 목록(있다면)")
+				
+				let str =""
+				
+				// ● 이미지와 이미지 아닌 파일의 차등을 둬서 표출하기 위해 확인
+				$(arr).each(function(i, attach){
+
+					// * 이미지인 경우
+					if(attach.fileType){
+						let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" +
+															  attach.uuid + "_" + attach.fileName);
+						
+						// 다운로드 받을때는 썸네일을 받으면 안되므로 변수 하나 더 생성 (다운로드는 오리지널로 받아야하므로)
+						let fileCallPathOriginal = encodeURIComponent(
+												attach.uploadPath + "/" + 
+												attach.uuid + "_" + 
+												attach.fileName);
+						
+						str += "<li " +
+							       "data-path='" + attach.uploadPath + "' " +
+							       "data-uuid='" + attach.uuid + "' " +
+							       "data-filename='" + attach.fileName + "' " +
+							       "data-type='" + attach.fileType + "' >"+ // end '<li> 안에 속성 넣기'
+							       "<a href='/download?fileName=" + fileCallPathOriginal + "'>" +
+								       "<div>" +
+								       		"<img src='/display?fileName=" + fileCallPath + "'>" +
+								       		attach.fileName + 
+								       "</div>" +
+							       "</a>" +
+							   "</li>";
+					// end if	
+					
+					// * 일반 파일인 경우
+					}else{
+						
+						let fileCallPath = encodeURIComponent(
+								attach.uploadPath + "/" + // 썸네일이 없기 때문에 s_를 뺀다
+								attach.uuid + "_" +
+								attach.fileName);
+
+						str += "<li " +
+							       "data-path='" + attach.uploadPath + "' " +
+							       "data-uuid='" + attach.uuid + "' " +
+							       "data-filename='" + attach.fileName + "' " +
+							       "data-type='" + attach.fileType + "'> " +    // end '<li> 안에 속성 넣기'
+							       "<a href='/download?fileName=" + fileCallPath + "'>" + 
+								       "<div>" +
+									       "<span> " + attach.fileName + "</span><br/>" +
+							       		   "<img src='/resources/attachment_87543.png' width='100px' height='100px'>" +
+							       	   "</div>" +
+						       	   "</a>" +
+							   "</li>";
+					}// end else
+				
+				})// end .each
+				
+				$("#uploadResult ul").html(str);
+				
+			}); // end GetJSON
+			
+		})();// end anonymous
+			 // ();는 호출하는거(?)
+			
+
 
 		
 	
